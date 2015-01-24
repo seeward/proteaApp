@@ -61,7 +61,7 @@ document.addEventListener('deviceready', function() {
 
         $.each(data.march, function(i, o) {
             //console.log(JSON.stringify(o));
-            fixturesHtml2 += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+            fixturesHtml2 += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
 
         });
 
