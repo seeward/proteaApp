@@ -1,8 +1,10 @@
 document.addEventListener('deviceready', function() {
 
     var homePage = $(".home").html();
-    $("#page").html(homePage);
-    var injectPlayers, injectVids, injectRank, injectFixtures;
+    var login = $(".login").html();
+    $("#page").html(login);
+    
+    var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
     var htmlFixtures = "<h4>Protea World Cup Fixtures 2015</h4>";
     var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
@@ -15,44 +17,188 @@ document.addEventListener('deviceready', function() {
 
     var injectHome = $(".home").html();
 
+    $("#page").on("touchstart","#register",function(e){
+        
+        $("#mainMenu").fadeIn();
+         $("#footer").fadeIn();
+         $("#page").html(injectHome);
 
-    $("#mainMenu").on("click", "#players", function(e) {
+    });
+
+    injectNews = $(".news").html();
+
+    injectRecords = $(".records").html();
+
+    $("#page").on("touchstart", "#bestBattingInnings",
+        function(e) {
+            $.getJSON("highestBattingInnings.json", function(d) {
+                $("#page").html("");
+                h = "<div class='container' style='margin-top:5px;padding-bottom:45px'><h4>Most Runs in a WC Innings</h4><table class='table table-striped'>";
+                h += "<tr><th>Runs</th><th>Player</th><th>Match</th><th>Year</th></tr>";
+                $.each(d, function(i, o) {
+
+                    h += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
+
+                });
+                h += "</table></div>";
+                $("#page").html(h);
+            });
+        });
+
+
+
+
+    $("#page").on("touchstart", "#boundariesInnings", function(e) {
+        $.getJSON("mostBoundariesInnings.json", function(data) {
+            i = "<div class='container'><h4>Most Boundaires in a WC Innings</h4><table class='table table-striped'>";
+            i += "<tr><th>Runs</th><th>Balls</th><th>4s</th><th>6s</th><th>Player</th><th>Year</th></tr>";
+
+            $.each(data, function(er, o) {
+                i += "<tr><td>" + o.runs + "</td><td>" + o.balls + "</td><td>" + o.fours + "</td><td>" + o.sixes + "</td><td>" + o.player.text + "</td><td>" + o.year + "</td></tr>";
+            });
+
+            i += "</table></div>";
+
+            $("#page").html(i);
+
+
+        });
+    });
+
+    $("#page").on("touchstart", "#runsByLineup", function(e) {
+        $.getJSON("mostRunsPerBattingLineup.json", function(dt) {
+            i = "<div class='container'><h4>Most Runs by Position in a WC Innings</h4><table class='table table-striped'>";
+            i += "<tr><th>Position</th><th>Score</th><th>Player</th><th>Match</th></tr>";
+
+            $.each(dt, function(er, o) {
+                i += "<tr><td>" + o.position + "</td><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td></tr>";
+            });
+
+            i += "</table></div>";
+
+            $("#page").html(i);
+        });
+    });
+
+
+    $("#page").on("touchstart", "#totalRuns", function(e) {
+        $.getJSON("mostRunsTotal.json", function(dat) {
+            i = "<div class='container'><h4>Most Career Runs in the WC</h4><table class='table table-striped'>";
+            i += "<tr><th>Player</th><th>Matches</th><th>Runs</th><th>High</th><th>Avg</th></tr>";
+
+            $.each(dat, function(er, o) {
+                i += "<tr><td>" + o.player.text + "</td><td>" + o.matches + "</td><td>" + o.runs + "</td><td>" + o.high + "</td><td>" + o.average + "</td></tr>";
+            });
+
+            i += "</table></div>";
+
+            $("#page").html(i);
+        });
+
+    });
+
+    $("#page").on("touchstart", "#mostWickets", function(e) {
+        $.getJSON("mostWickets.json", function(data2) {
+            i = "<div class='container'><h4>Most Career Wickets in the WC</h4><table class='table table-striped'>";
+            i += "<tr><th>Player</th><th>Wickets</th><th>Best</th><th>Average</th></tr>";
+
+            $.each(data2, function(er, o) {
+                i += "<tr><td>" + o.player.text + "</td><td>" + o.wkts + "</td><td>" + o.best + "</td><td>" + o.average + "</td></tr>";
+            });
+
+            i += "</table></div>";
+
+            $("#page").html(i);
+        });
+    });
+    $("#page").on("touchstart", "#bestBowlingInnings", function(e) {
+        $.getJSON("bestInningsBowling.json", function(data3) {
+            i = "<div class='container'><h4>Best Bowling Innings in the WC</h4><table class='table table-striped'>";
+            i += "<tr><th>Score</th><th>Player</th><th>Match</th><th>Grounds</th><th>Year</th></tr>";
+
+            $.each(data3, function(er, o) {
+                i += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.grounds.text + "</td><td>" + o.year + "</td></tr>";
+            });
+
+            i += "</table></div>";
+
+            $("#page").html(i);
+        });
+    });
+
+
+
+    $("#mainMenu").on("touchstart", "#players", function(e) {
         //alert($(".players").html());
         $("#page").html('');
-        
-        $("#page").html(injectPlayers).animate({ scrollTop: 0 }, "fast");;
+
+        $("#page").html(injectPlayers).animate({
+            scrollTop: 0
+        }, "fast");;
 
 
     });
 
-    $("#mainMenu").on("click", "#videos", function(e) {
+    $("#footer").on("touchstart", "#videos", function(e) {
 
         $("#page").html('');
-        
+
         $("#page").html(injectVids);
 
     });
 
 
-    $("#mainMenu").on("click", "#rankings", function(e) {
+    $("#footer").on("touchstart", "#rankings", function(e) {
 
         $("#page").html('');
-        
+
         $("#page").html(injectRank);
-        
+
     });
-    $("#mainMenu").on("click", "#fixtures", function(e) {
+
+    $("#footer").on("touchstart", "#records", function(e) {
+
         $("#page").html('');
-        
+
+        $("#page").html(injectRecords);
+
+    });
+
+    $("#mainMenu").on("touchstart", "#fixtures", function(e) {
+        $("#page").html('');
+
         $("#page").html(injectFixtures);
 
 
     });
 
-      $("#footer").on("click", "#home", function(e) {
+
+
+    $("#mainMenu").on("touchstart", "#news", function(e) {
+        $("#page").html('<h4>Loading latest News</h4>');
+        h = "<h4>Latest South African News</h4><ul>"
+       $.ajax({
+        url: "http://pipes.yahoo.com/pipes/pipe.run?_id=fb5976bfef39b2913e42671e86c505c5&_render=json",
+        dataType: "json",
+
+       }).done(function(data){
+        $.each(data.value.items,function(i,o){
+            h += "<li class='newsItem'><a style='color:#007E45' href='"+o.link+"'>"+o.title+"</a><br><p style='font-size:12px;margin-bottom:-10px'>"+o.pubDate+"</p><hr></li>";
+        });
+
+
+        h += "</ul>";
+
+        $("#page").html(h);
+       });
+
+    });
+
+
+    $("#footer").on("touchstart", "#home", function(e) {
 
         $("#page").html('');
-        
+
         $("#page").html(injectHome);
 
     });
@@ -65,15 +211,27 @@ document.addEventListener('deviceready', function() {
 
         $.each(data.feb, function(i, o) {
             console.log(JSON.stringify(o));
-            fixturesHtml += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+
+            if (o.team1 === "South Africa" || o.team2 === "South Africa") {
+                fixturesHtml += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+
+            } else {
+                fixturesHtml += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+
+            }
+
 
         });
 
         fixturesHtml += "</table>";
 
         $.each(data.march, function(i, o) {
-            //console.log(JSON.stringify(o));
-            fixturesHtml2 += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
+           if (o.team1 === "South Africa" || o.team2 === "South Africa" || o.team1 =="TBA (Final)") {
+            fixturesHtml2 += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
+ } else {
+                fixturesHtml2 += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
+
+      }
 
         });
 
@@ -85,18 +243,20 @@ document.addEventListener('deviceready', function() {
     };
 
 
+
+
     $.getJSON("proteas.json", processPlayers);
 
-    function processPlayers(dt){
+    function processPlayers(dt) {
 
-        
+
         $.each(dt, function(ind, ob) {
-            htmlPlayers += "<li class='link' style='margin-bottom:10px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='img-thumbnail' style='width:60px' src='" + ob.player.img + "'></div><h4>" + ob.player.name + "</h4><p>" + ob.player.role + "</p>" +
+            htmlPlayers += "<li class='link' style='margin-bottom:10px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='pic' style='width:60px' src='" + ob.player.img + "'></div><h4>" + ob.player.name + "</h4><p>" + ob.player.role + "</p>" +
                 ob.player.birthdate + "</li>";
         });
 
 
-        $(document).on("click", "img", function(e) {
+        $("#page").on("touchstart", ".pic", function(e) {
             e.preventDefault();
             playerPackage = e.target.id;
             $(".players").trigger("playerSelected", playerPackage);
@@ -185,7 +345,7 @@ document.addEventListener('deviceready', function() {
 
     function parseData(data) {
         $.each(data, function(ind, obj) {
-            htmlVids += "<li><h4>" + obj.video.text + "</h4><iframe width='100%' height='215' src='http://www.youtube.com/embed/"+obj.video.href+"?rel=0&amp;controls=0&amp;showinfo=0' frameborder='0' allowfullscreen></iframe></li>";
+            htmlVids += "<li><h4>" + obj.video.text + "</h4><iframe width='100%' height='215' src='http://www.youtube.com/embed/" + obj.video.href + "?rel=0&amp;controls=0&amp;showinfo=0' frameborder='0' allowfullscreen></iframe></li>";
         });
 
 
