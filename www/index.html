@@ -7,6 +7,7 @@
         <meta name="msapplication-tap-highlight" content="no" />
         
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+      
        
         <title>Protea Fire</title>
     </head>
@@ -16,7 +17,7 @@ h4 {
     padding-left:10px;
 }
 
-img {
+#proteasMain {
     box-shadow: 0 0 15px black;
 }
 
@@ -25,7 +26,22 @@ img {
     top:5px;
     z-index: 10;
 }
+
+nav {
+    z-index: 11
+
+}
+
+
+
+
+img {
+    z-index: 8;
+}
+
+
         #page {
+    -webkit-overflow-scrolling: touch;
             position:absolute;
             top:40px;
             width:95%;
@@ -53,17 +69,27 @@ ul li {
 }
 
         </style>
+
+
 <div class='container'>
+
+
+
 <div id='mainMenu'>
+
+
+  
     <div class="btn-group" role="toolbar">
 
-    <button type="button" class='btn btn-success' id='players'>Squad</button>
-    <button type="button" class='btn btn-success' id='videos'>#ProteaFire</button>
-    <button type="button" class='btn btn-success' id='rankings'>Rankings</button>
-    <button type="button" class='btn btn-success' id='fixtures'>Fixtures</button>
+    <button class='btn btn-success' type="button" id='players'>Squad</button>
+    <button class='btn btn-success' type="button" id='videos'>#ProteaFire</button>
+    <button class='btn btn-success' type="button" id='rankings'>Rankings</button>
+    <button class='btn btn-success' type="button" id='fixtures'>Fixtures</button>
     
     </div>
     </div>
+
+
      </div>
     <div id="page"></div>
     
@@ -74,13 +100,15 @@ ul li {
     <div class-"container">
 
         <div class="row" style='margin-top:20px;margin-left:17px'>
-            <img class='img-rounded img-responsive' src='imgs/proteas.jpg' />
+            <img id='proteasMain' class='img-rounded img-responsive' src='imgs/proteas.jpg' />
         </div>
 
                 <div class="row" style='margin-top:20px;margin-left:12;text-align:center;color:green'>
             <h4 style='font-size:32px'>Welcome to Protea Fire!</h4>
             <p style="margin-top:-15px">Your place for Proteas World Cup Fever</p>
+            <noscript>
             <div id="adBlock" style="background-color:#c1c1c1;margin-top:25px;height:60px;width:320px;color:grey;border-top:1px solid #c1c1c1;margin-left:35px"><p><br>ADBLOCK INSERTED HERE</p></div>
+        </noscript>
         </div>
 
 
@@ -95,15 +123,29 @@ ul li {
 <div class='videos' style='position:absolute;left:-11000px'></div>
 <div class="rankings" style="position:absolute;left:-11000px"></div>
 
+<div id="footer" style="position:fixed;z-index:22;left:0px;bottom:0px;width:100%;margin-left:3px">
+    
+ <div class="btn-group" role="toolbar">
+
+    <button class='btn btn-success' type="button" id='social'>Social</button>
+    <button class='btn btn-success' type="button" id='records'>Records</button>
+    <button class='btn btn-success' type="button" id='wc'>World Cup</button>
+    <button class='btn btn-success' type="button" id='news'>News</button>
+        <button class='btn btn-success' type="button" id='home'>Home</button>
+    
+    </div>
 
 
+</div>
 
 
+<script type="text/javascript" src="js/jq.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-        <link rel="stylesheet" href="js/bs.css" >
-        <script type="text/javascript" src="js/jq.js"></script>
-        <script type="text/javascript" src="js/bs.js"></script>
+      
         
+        <script type="text/javascript" src="js/bs.js"></script>
+          <link rel="stylesheet" href="js/bs.css" >
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
        

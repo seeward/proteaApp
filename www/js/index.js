@@ -2,6 +2,7 @@ document.addEventListener('deviceready', function() {
 
     var homePage = $(".home").html();
     $("#page").html(homePage);
+    var injectPlayers, injectVids, injectRank, injectFixtures;
     var htmlFixtures = "<h4>Protea World Cup Fixtures 2015</h4>";
     var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
@@ -12,36 +13,47 @@ document.addEventListener('deviceready', function() {
     var html3 = "<h4>T20</h4><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
     var htmlVids = "<h4>Protea Fire Videos</h4><ul>";
 
-
+    var injectHome = $(".home").html();
 
 
     $("#mainMenu").on("click", "#players", function(e) {
         //alert($(".players").html());
         $("#page").html('');
-        var injectPlayers = $(".players").html();
-        $("#page").html(injectPlayers);
+        
+        $("#page").html(injectPlayers).animate({ scrollTop: 0 }, "fast");;
+
 
     });
 
     $("#mainMenu").on("click", "#videos", function(e) {
 
         $("#page").html('');
-        var injectVids = $(".videos").html();
+        
         $("#page").html(injectVids);
 
     });
+
+
     $("#mainMenu").on("click", "#rankings", function(e) {
 
         $("#page").html('');
-        var injectRank = $(".rankings").html()
+        
         $("#page").html(injectRank);
         
     });
     $("#mainMenu").on("click", "#fixtures", function(e) {
         $("#page").html('');
-        var injectFixtures = $(".fixtures").html()
+        
         $("#page").html(injectFixtures);
 
+
+    });
+
+      $("#footer").on("click", "#home", function(e) {
+
+        $("#page").html('');
+        
+        $("#page").html(injectHome);
 
     });
 
@@ -69,6 +81,7 @@ document.addEventListener('deviceready', function() {
 
 
         $(".fixtures").html(fixturesHtml + fixturesHtml2);
+        injectFixtures = $(".fixtures").html()
     };
 
 
@@ -78,7 +91,7 @@ document.addEventListener('deviceready', function() {
 
         
         $.each(dt, function(ind, ob) {
-            htmlPlayers += "<li class='link' style='margin-bottom:10px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='img-circle' height='75'src='" + ob.player.img + "'></div><h4>" + ob.player.name + "</h4><p>" + ob.player.role + "</p>" +
+            htmlPlayers += "<li class='link' style='margin-bottom:10px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='img-thumbnail' style='width:60px' src='" + ob.player.img + "'></div><h4>" + ob.player.name + "</h4><p>" + ob.player.role + "</p>" +
                 ob.player.birthdate + "</li>";
         });
 
@@ -92,7 +105,7 @@ document.addEventListener('deviceready', function() {
         htmlPlayers += "</ul>";
 
         $(".players").append(htmlPlayers);
-
+        injectPlayers = $(".players").html();
 
     };
 
@@ -159,7 +172,7 @@ document.addEventListener('deviceready', function() {
 
 
         $(".rankings").html(html + html2 + html3);
-
+        injectRank = $(".rankings").html()
 
     }
 
@@ -179,6 +192,7 @@ document.addEventListener('deviceready', function() {
         htmlVids += "</ul>";
 
         $(".videos").html(htmlVids);
+        injectVids = $(".videos").html();
     }
 
 
