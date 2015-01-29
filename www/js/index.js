@@ -3,9 +3,17 @@ document.addEventListener('deviceready', function() {
     var homePage = $(".home").html();
     var login = $(".login").html();
     $("#page").html(login);
+
+
+    $("#page").on("touchstart","#sorter",function(e){
+        $(".active").removeClass("active");
+        $(this).addClass("active");
+        $(".notSaGames").fadeOut();
+
+    });
     
     var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
-    var htmlFixtures = "<h4>Protea World Cup Fixtures 2015</h4>";
+    var htmlFixtures = "<h4>Protea World Cup Fixtures 2015</h4><div class='btn-group btn-toggle'><button id='sort' class='btn btn-xs btn-default'>ON</button><button class='btn btn-xs btn-primary active'>OFF</button></div>";
     var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><ul>";
@@ -38,6 +46,22 @@ document.addEventListener('deviceready', function() {
                 $.each(d, function(i, o) {
 
                     h += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
+
+                });
+                h += "</table></div>";
+                $("#page").html(h);
+            });
+        });
+
+ $("#page").on("touchstart", "#bowlingCareer",
+        function(e) {
+            $.getJSON("bowlingCareer.json", function(d3) {
+                $("#page").html("");
+                h = "<div class='container' style='margin-top:5px;padding-bottom:45px'><h4>Bowling Stats in WC by Player</h4><table class='table table-striped'>";
+                h += "<tr><th>Player</th><th>Wkts</th><th>Avg</th><th>Strike Rate</th><th>Economy</th></tr>";
+                $.each(d3, function(i, o) {
+
+                    h += "<tr><td>" + o.player.text + "</td><td>" + o.wkts + "</td><td>" + o.avg + "</td><td>" + o.srate + "</td><td>" + o.econ + "</td></tr>";
 
                 });
                 h += "</table></div>";
@@ -216,7 +240,7 @@ document.addEventListener('deviceready', function() {
                 fixturesHtml += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
 
             } else {
-                fixturesHtml += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+                fixturesHtml += "<tr class='notSaGames'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
 
             }
 
@@ -229,7 +253,7 @@ document.addEventListener('deviceready', function() {
            if (o.team1 === "South Africa" || o.team2 === "South Africa" || o.team1 =="TBA (Final)") {
             fixturesHtml2 += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
  } else {
-                fixturesHtml2 += "<tr><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
+                fixturesHtml2 += "<tr class='notSaGames'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
 
       }
 
