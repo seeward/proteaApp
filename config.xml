@@ -35,6 +35,7 @@
 
     <gap:plugin name="org.apache.cordova.media" />
 <gap:plugin name="com.parse.cordova.core.pushplugin" version="0.1.0" />
+
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <icon src="icon.png" />
