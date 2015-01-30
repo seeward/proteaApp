@@ -422,7 +422,44 @@ document.addEventListener('deviceready', function() {
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
         //   wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6
 
-        
+        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6", function() {
+
+
+
+            parsePlugin.subscribe('SampleChannel', function() {
+
+                parsePlugin.getInstallationId(function(id) {
+
+                    var installation = new Parse.Object("Installation");
+                    if (installation) {
+                        installation.set("installationId", id);
+
+                        installation.save();
+                    }
+
+
+                }, function(e) {
+                    alert('error');
+                });
+
+            }, function(e) {
+                alert('error');
+            });
+
+        }, function(e) {
+            alert('error');
+        });
+
+
+
+        if (window.localStorage.getItem("user")) {
+            $("#page").html(injectHome);
+            $("#mainMenu").show();
+            $("#footer").show();
+        } else {
+            $("#page").html(login);
+        }
+
 
 
 
