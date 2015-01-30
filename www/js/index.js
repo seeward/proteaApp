@@ -5,13 +5,14 @@ document.addEventListener('deviceready', function() {
     $("#page").html(login);
 
 
-    $("#page").on("touchstart","#sorter",function(e){
+
+    $("#page").on("touchstart", "#sorter", function(e) {
         $(".active").removeClass("active");
         $(this).addClass("active");
         $(".notSaGames").fadeOut();
 
     });
-    
+
     var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
     var htmlFixtures = "<h4>Protea World Cup Fixtures 2015</h4><div class='btn-group btn-toggle'><button id='sort' class='btn btn-xs btn-default'>ON</button><button class='btn btn-xs btn-primary active'>OFF</button></div>";
     var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
@@ -25,11 +26,11 @@ document.addEventListener('deviceready', function() {
 
     var injectHome = $(".home").html();
 
-    $("#page").on("touchstart","#register",function(e){
-        
-        $("#mainMenu").fadeIn();
-         $("#footer").fadeIn();
-         $("#page").html(injectHome);
+    $("#page").on("touchstart", "#register", function(e) {
+
+        $("#mainMenu").show();
+        $("#footer").show();
+        $("#page").html(injectHome);
 
     });
 
@@ -53,7 +54,7 @@ document.addEventListener('deviceready', function() {
             });
         });
 
- $("#page").on("touchstart", "#bowlingCareer",
+    $("#page").on("touchstart", "#bowlingCareer",
         function(e) {
             $.getJSON("bowlingCareer.json", function(d3) {
                 $("#page").html("");
@@ -201,20 +202,20 @@ document.addEventListener('deviceready', function() {
     $("#mainMenu").on("touchstart", "#news", function(e) {
         $("#page").html('<h4>Loading latest News</h4>');
         h = "<h4>Latest South African News</h4><ul>"
-       $.ajax({
-        url: "http://pipes.yahoo.com/pipes/pipe.run?_id=fb5976bfef39b2913e42671e86c505c5&_render=json",
-        dataType: "json",
+        $.ajax({
+            url: "http://pipes.yahoo.com/pipes/pipe.run?_id=fb5976bfef39b2913e42671e86c505c5&_render=json",
+            dataType: "json",
 
-       }).done(function(data){
-        $.each(data.value.items,function(i,o){
-            h += "<li class='newsItem'><a style='color:#007E45' href='"+o.link+"'>"+o.title+"</a><br><p style='font-size:12px;margin-bottom:-10px'>"+o.pubDate+"</p><hr></li>";
+        }).done(function(data) {
+            $.each(data.value.items, function(i, o) {
+                h += "<li class='newsItem'><a style='color:#007E45' href='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
+            });
+
+
+            h += "</ul>";
+
+            $("#page").html(h);
         });
-
-
-        h += "</ul>";
-
-        $("#page").html(h);
-       });
 
     });
 
@@ -250,12 +251,12 @@ document.addEventListener('deviceready', function() {
         fixturesHtml += "</table>";
 
         $.each(data.march, function(i, o) {
-           if (o.team1 === "South Africa" || o.team2 === "South Africa" || o.team1 =="TBA (Final)") {
-            fixturesHtml2 += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
- } else {
+            if (o.team1 === "South Africa" || o.team2 === "South Africa" || o.team1 == "TBA (Final)") {
+                fixturesHtml2 += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
+            } else {
                 fixturesHtml2 += "<tr class='notSaGames'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar - " + o.date + "</td></tr>";
 
-      }
+            }
 
         });
 
@@ -377,8 +378,35 @@ document.addEventListener('deviceready', function() {
 
         $(".videos").html(htmlVids);
         injectVids = $(".videos").html();
-    }
+    };
 
 
+    var init = function() {
+        Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
+
+        parsePlugin.initialize(appId, clientKey, function() {
+
+            parsePlugin.subscribe('SampleChannel', function() {
+
+                parsePlugin.getInstallationId(function(id) {
+
+             navigator.notification.alert(id);
+
+                }, function(e) {
+                    alert('error');
+                });
+
+            }, function(e) {
+                alert('error');
+            });
+
+        }, function(e) {
+            alert('error');
+        });
+
+
+    };
+
+    init();
 
 });
