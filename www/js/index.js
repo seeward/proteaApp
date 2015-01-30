@@ -2,19 +2,36 @@ document.addEventListener('deviceready', function() {
 
     var homePage = $(".home").html();
     var login = $(".login").html();
+    var pageQueue = [];
+    var currentPage = "";
+    var lastPage = "init";
+    document.addEventListener("backbutton", function(e) {
+
+        if (lastPage == "init") {
+            return
+        } else {
+            $("#page").html(lastPage);
+        }
+    }, true);
+
+    $("body").on("touchstart", "#backer", function(e) {
+        if (lastPage == "init") {
+            return
+        } else {
+            $("#page").html(lastPage);
+        }
+    });
 
 
 
+    $("#page").on("touchstart", "#sort", function(e) {
 
-    $("#page").on("touchstart", "#sorter", function(e) {
-        $(".active").removeClass("active");
-        $(this).addClass("active");
-        $(".notSaGames").fadeOut();
+        $(".notSaGames").remove();
 
     });
 
     var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
-    var htmlFixtures = "<h4>Protea World Cup Fixtures 2015</h4><div class='btn-group btn-toggle'><button id='sort' class='btn btn-xs btn-default'>ON</button><button class='btn btn-xs btn-primary active'>OFF</button></div>";
+    var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><button id='sort' class='btn btn-block btn-default'>Proteas Games</button>";
     var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><ul>";
@@ -34,7 +51,7 @@ document.addEventListener('deviceready', function() {
         var p = $("#userPassword").val();
 
         if (u == "" || p == "" || e == "") {
-            $("#statusMsg").html("<br><p>You must enter all details to register!</p>").fadeIn();
+            $("#statusMsg").html("<br><h4>You must enter all details to register!</h4>").fadeIn();
             return;
         }
 
@@ -50,14 +67,13 @@ document.addEventListener('deviceready', function() {
         userDetails.p = p;
         userDetails.e = e;
 
-
-
         user.signUp(null, {
             success: function(user) {
+
                 $("#page").html(injectHome);
                 $("#mainMenu").show();
                 $("#footer").show();
-
+                currentPage = injectHome;
                 window.localStorage.setItem("user", JSON.stringify(userDetails));
             },
             error: function(user, error) {
@@ -76,6 +92,7 @@ document.addEventListener('deviceready', function() {
 
     $("#page").on("touchstart", "#bestBattingInnings",
         function(e) {
+            lastPage = injectRecords;
             $.getJSON("highestBattingInnings.json", function(d) {
                 $("#page").html("");
                 h = "<div class='container' style='margin-top:5px;padding-bottom:45px'><h4>Most Runs in a WC Innings</h4><table class='table table-striped'>";
@@ -92,10 +109,11 @@ document.addEventListener('deviceready', function() {
 
     $("#page").on("touchstart", "#bowlingCareer",
         function(e) {
+            lastPage = injectRecords;
             $.getJSON("bowlingCareer.json", function(d3) {
                 $("#page").html("");
-                h = "<div class='container' style='margin-top:5px;padding-bottom:45px'><h4>Bowling Stats in WC by Player</h4><table class='table table-striped'>";
-                h += "<tr><th>Player</th><th>Wkts</th><th>Avg</th><th>Strike Rate</th><th>Economy</th></tr>";
+                h = "<div class='container' style='margin-top:5px;padding-bottom:45px'><h4>Protea WC Bowling Stats</h4><table class='table table-striped'>";
+                h += "<tr><th>Player</th><th>Wkts</th><th>Avg</th><th>Strike Rate</th><th>Econ</th></tr>";
                 $.each(d3, function(i, o) {
 
                     h += "<tr><td>" + o.player.text + "</td><td>" + o.wkts + "</td><td>" + o.avg + "</td><td>" + o.srate + "</td><td>" + o.econ + "</td></tr>";
@@ -110,6 +128,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("#page").on("touchstart", "#boundariesInnings", function(e) {
+        lastPage = injectRecords;
         $.getJSON("mostBoundariesInnings.json", function(data) {
             i = "<div class='container'><h4>Most Boundaires in a WC Innings</h4><table class='table table-striped'>";
             i += "<tr><th>Runs</th><th>Balls</th><th>4s</th><th>6s</th><th>Player</th><th>Year</th></tr>";
@@ -127,6 +146,7 @@ document.addEventListener('deviceready', function() {
     });
 
     $("#page").on("touchstart", "#runsByLineup", function(e) {
+        lastPage = injectRecords;
         $.getJSON("mostRunsPerBattingLineup.json", function(dt) {
             i = "<div class='container'><h4>Most Runs by Position in a WC Innings</h4><table class='table table-striped'>";
             i += "<tr><th>Position</th><th>Score</th><th>Player</th><th>Match</th></tr>";
@@ -143,6 +163,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("#page").on("touchstart", "#totalRuns", function(e) {
+        lastPage = injectRecords;
         $.getJSON("mostRunsTotal.json", function(dat) {
             i = "<div class='container'><h4>Most Career Runs in the WC</h4><table class='table table-striped'>";
             i += "<tr><th>Player</th><th>Matches</th><th>Runs</th><th>High</th><th>Avg</th></tr>";
@@ -159,6 +180,7 @@ document.addEventListener('deviceready', function() {
     });
 
     $("#page").on("touchstart", "#mostWickets", function(e) {
+        lastPage = injectRecords;
         $.getJSON("mostWickets.json", function(data2) {
             i = "<div class='container'><h4>Most Career Wickets in the WC</h4><table class='table table-striped'>";
             i += "<tr><th>Player</th><th>Wickets</th><th>Best</th><th>Average</th></tr>";
@@ -173,12 +195,13 @@ document.addEventListener('deviceready', function() {
         });
     });
     $("#page").on("touchstart", "#bestBowlingInnings", function(e) {
+        lastPage = injectRecords;
         $.getJSON("bestInningsBowling.json", function(data3) {
             i = "<div class='container'><h4>Best Bowling Innings in the WC</h4><table class='table table-striped'>";
-            i += "<tr><th>Score</th><th>Player</th><th>Match</th><th>Grounds</th><th>Year</th></tr>";
+            i += "<tr><th>Score</th><th>Player</th><th>Match</th><th>Year</th></tr>";
 
             $.each(data3, function(er, o) {
-                i += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.grounds.text + "</td><td>" + o.year + "</td></tr>";
+                i += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
             });
 
             i += "</table></div>";
@@ -190,52 +213,59 @@ document.addEventListener('deviceready', function() {
 
 
     $("#mainMenu").on("touchstart", "#players", function(e) {
+        lastPage = currentPage;
         //alert($(".players").html());
         $("#page").html('');
 
         $("#page").html(injectPlayers).animate({
             scrollTop: 0
         }, "fast");;
-
+        currentPage = injectPlayers;
 
     });
 
     $("#footer").on("touchstart", "#videos", function(e) {
-
+        lastPage = currentPage;
         $("#page").html('');
 
         $("#page").html(injectVids);
+        currentPage = injectVids;
 
     });
 
 
     $("#footer").on("touchstart", "#rankings", function(e) {
-
+        lastPage = currentPage;
         $("#page").html('');
 
         $("#page").html(injectRank);
+        currentPage = injectRank;
 
     });
 
     $("#footer").on("touchstart", "#records", function(e) {
-
+        lastPage = currentPage;
         $("#page").html('');
 
         $("#page").html(injectRecords);
 
+        currentPage = injectRecords
+
     });
 
     $("#mainMenu").on("touchstart", "#fixtures", function(e) {
+        lastPage = currentPage;
         $("#page").html('');
 
         $("#page").html(injectFixtures);
 
-
+        currentPage = injectFixtures;
     });
 
 
 
     $("#mainMenu").on("touchstart", "#news", function(e) {
+        lastPage = currentPage;
         $("#page").html('<h4>Loading latest News</h4>');
         h = "<h4>Latest South African News</h4><ul>"
         $.ajax({
@@ -251,16 +281,18 @@ document.addEventListener('deviceready', function() {
             h += "</ul>";
 
             $("#page").html(h);
+            currentPage = h;
         });
 
     });
 
 
     $("#footer").on("touchstart", "#home", function(e) {
-
+        lastPage = currentPage;
         $("#page").html('');
 
         $("#page").html(injectHome);
+        currentPage = injectHome;
 
     });
 
@@ -317,7 +349,7 @@ document.addEventListener('deviceready', function() {
         });
 
 
-        $("#page").on("touchstart", ".pic", function(e) {
+        $("#page").on("touchend", ".pic", function(e) {
             e.preventDefault();
             playerPackage = e.target.id;
             $(".players").trigger("playerSelected", playerPackage);
@@ -351,8 +383,12 @@ document.addEventListener('deviceready', function() {
         playerDetails += "<p>" + playerData.bio + "</p>";
 
         playerDetails += "</div>";
-
+        $("#page").scrollTop();
         $("#page").html(playerDetails);
+        
+
+       
+        
 
     });
 
@@ -420,37 +456,40 @@ document.addEventListener('deviceready', function() {
     var init = function() {
 
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
-        //   wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6
-
-        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
 
+        /*        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
-            parsePlugin.subscribe('SampleChannel', function() {
+            parsePlugin.subscribe('allUsers', function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
-                  
-
-
                 }, function(e) {
-                    alert('error');
+                   
                 });
 
             }, function(e) {
-                alert('error');
+               
             });
 
         }, function(e) {
-            alert('error');
-        });
+          
+        });*/
 
 
 
         if (window.localStorage.getItem("user")) {
             $("#page").html(injectHome);
+            //pageQueue.push("injectHome");
+            currentPage = injectHome;
             $("#mainMenu").show();
             $("#footer").show();
+
+            if (device.platform == "iOS") {
+                $("#backer").show();
+                $("#mainMenu").css("margin-top","25px");
+                $("#backer").css("margin-top","25px");
+            }
         } else {
             $("#page").html(login);
         }

@@ -23,11 +23,14 @@ h4 {
 
 #mainMenu {
     display:none;
+   
+    margin-left:60px;
     position: fixed;
-    top:5px;
-    margin-left: 20px;
+    z-index: 32;
+   
+    
 
-    z-index: 10;
+   
 }
 
 nav {
@@ -60,11 +63,11 @@ img {
         #page {
     -webkit-overflow-scrolling: touch;
             position:absolute;
-            top:40px;
+            top:48px;
             width:95%;
             padding:0px;
 
-            padding-bottom:25px;
+            padding-bottom:35px;
             padding-left:10px;
             margin:0px;
         }
@@ -99,8 +102,33 @@ ul li {
     padding:5px;
     font-size:25px;
 }
+
+#backer {
+    display:none;
+    position: fixed;
+    left:10px;
+    top:10px;
+    z-index: 28
+}
+
+
+
+#header {
+    display: block;
+    position: fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    width:100%;
+    padding-top:10px;
+    padding-bottom: 10px;
+     background: #ffcc00;
+      z-index: 27;
+
+}
         </style>
 
+<button id="backer" class="btn btn-xs btn-success"><</button>
 
 <div class='container'>
 
