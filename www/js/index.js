@@ -31,7 +31,7 @@ document.addEventListener('deviceready', function() {
     });
 
     var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
-    var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><button id='sort' class='btn btn-block btn-default'>Proteas Games</button>";
+    var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><button id='sort' class='btn btn-block btn-success'>Proteas Games</button>";
     var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><ul>";
@@ -125,6 +125,44 @@ document.addEventListener('deviceready', function() {
         });
 
 
+    $("#mainMenu").on("touchstart", "#connect",
+        function(e) {
+            $("#page").html("");
+
+            $.ajax({
+                url: "http://proteafirefan.tumblr.com/api/read/json?num=50",
+                type: "get",
+                dataType: "html"
+            }).done(function(data) {
+                    eval(data);
+                    var reData = tumblr_api_read;
+                    console.log(reData.posts);
+                    var hr = "<ul>";
+                    $.each(reData.posts, function(i, o) {
+
+                        if (o.type == "regular") {
+                            //alert(o['regular-body']);
+                            hr += "<li><h4>"+o['regular-title']+"</h4>"+o['regular-body']+"</li>";
+                        }
+
+
+                        if (o.type == "quote") {
+                            hr += "<li><h4>"+o['quote-text']+"</h4></li>";
+                        }
+
+                    });
+
+                    hr += "</ul>";
+
+
+                    $("#page").scrollTop();
+                    $("#page").html(hr);
+                }
+
+            );
+        });
+
+
 
 
     $("#page").on("touchstart", "#boundariesInnings", function(e) {
@@ -138,7 +176,7 @@ document.addEventListener('deviceready', function() {
             });
 
             i += "</table></div>";
-
+            $("#page").scrollTop();
             $("#page").html(i);
 
 
@@ -156,7 +194,7 @@ document.addEventListener('deviceready', function() {
             });
 
             i += "</table></div>";
-
+            $("#page").scrollTop();
             $("#page").html(i);
         });
     });
@@ -173,7 +211,7 @@ document.addEventListener('deviceready', function() {
             });
 
             i += "</table></div>";
-
+            $("#page").scrollTop();
             $("#page").html(i);
         });
 
@@ -190,7 +228,7 @@ document.addEventListener('deviceready', function() {
             });
 
             i += "</table></div>";
-
+            $("#page").scrollTop();
             $("#page").html(i);
         });
     });
@@ -205,7 +243,7 @@ document.addEventListener('deviceready', function() {
             });
 
             i += "</table></div>";
-
+            $("#page").scrollTop();
             $("#page").html(i);
         });
     });
@@ -216,10 +254,8 @@ document.addEventListener('deviceready', function() {
         lastPage = currentPage;
         //alert($(".players").html());
         $("#page").html('');
-
-        $("#page").html(injectPlayers).animate({
-            scrollTop: 0
-        }, "fast");;
+        $("#page").scrollTop();
+        $("#page").html(injectPlayers)
         currentPage = injectPlayers;
 
     });
@@ -227,7 +263,7 @@ document.addEventListener('deviceready', function() {
     $("#footer").on("touchstart", "#videos", function(e) {
         lastPage = currentPage;
         $("#page").html('');
-
+        $("#page").scrollTop();
         $("#page").html(injectVids);
         currentPage = injectVids;
 
@@ -237,7 +273,7 @@ document.addEventListener('deviceready', function() {
     $("#footer").on("touchstart", "#rankings", function(e) {
         lastPage = currentPage;
         $("#page").html('');
-
+        $("#page").scrollTop();
         $("#page").html(injectRank);
         currentPage = injectRank;
 
@@ -248,7 +284,7 @@ document.addEventListener('deviceready', function() {
         $("#page").html('');
 
         $("#page").html(injectRecords);
-
+        $("#page").scrollTop();
         currentPage = injectRecords
 
     });
@@ -256,7 +292,7 @@ document.addEventListener('deviceready', function() {
     $("#mainMenu").on("touchstart", "#fixtures", function(e) {
         lastPage = currentPage;
         $("#page").html('');
-
+        $("#page").scrollTop();
         $("#page").html(injectFixtures);
 
         currentPage = injectFixtures;
@@ -279,7 +315,7 @@ document.addEventListener('deviceready', function() {
 
 
             h += "</ul>";
-
+            $("#page").scrollTop();
             $("#page").html(h);
             currentPage = h;
         });
@@ -290,7 +326,7 @@ document.addEventListener('deviceready', function() {
     $("#footer").on("touchstart", "#home", function(e) {
         lastPage = currentPage;
         $("#page").html('');
-
+        $("#page").scrollTop();
         $("#page").html(injectHome);
         currentPage = injectHome;
 
@@ -385,10 +421,10 @@ document.addEventListener('deviceready', function() {
         playerDetails += "</div>";
         $("#page").scrollTop();
         $("#page").html(playerDetails);
-        
 
-       
-        
+
+
+
 
     });
 
@@ -458,7 +494,7 @@ document.addEventListener('deviceready', function() {
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
 
 
-        /*        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+                parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -474,7 +510,7 @@ document.addEventListener('deviceready', function() {
 
         }, function(e) {
           
-        });*/
+        });
 
 
 
@@ -487,8 +523,8 @@ document.addEventListener('deviceready', function() {
 
             if (device.platform == "iOS") {
                 $("#backer").show();
-                $("#mainMenu").css("margin-top","25px");
-                $("#backer").css("margin-top","25px");
+                $("#mainMenu").css("margin-top", "25px");
+                $("#backer").css("margin-top", "25px");
             }
         } else {
             $("#page").html(login);
