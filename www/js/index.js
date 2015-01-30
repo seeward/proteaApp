@@ -425,7 +425,7 @@ document.addEventListener('deviceready', function() {
         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6", function() {
 
 
-
+console.log("Test +++++++++++++++++++++++++++++++++");
             parsePlugin.subscribe('SampleChannel', function() {
 
                 parsePlugin.getInstallationId(function(id) {
