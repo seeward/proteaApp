@@ -425,20 +425,13 @@ document.addEventListener('deviceready', function() {
         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6", function() {
 
 
-
+            alert("Success!");
             parsePlugin.subscribe('SampleChannel', function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
-                    /**
-             * Now you can construct an object and save it to your own services, or Parse, and corrilate users to parse installations
-             * 
-             var install_data = {
-                installation_id: id,
-                channels: ['SampleChannel']
-             }
-             *
-             */
+
+                    alert(id);
 
                 }, function(e) {
                     alert('error');
