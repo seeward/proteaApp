@@ -383,26 +383,16 @@ document.addEventListener('deviceready', function() {
 
     var init = function() {
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
+        //navigator.notification.alert("Init Fired...");
 
-        parsePlugin.initialize(appId, clientKey, function() {
 
-            parsePlugin.subscribe('SampleChannel', function() {
 
-                parsePlugin.getInstallationId(function(id) {
+            window.parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC", function() {
+        alert('success');
+    }, function(e) {
+        alert('error');
+    });
 
-             navigator.notification.alert(id);
-
-                }, function(e) {
-                    alert('error');
-                });
-
-            }, function(e) {
-                alert('error');
-            });
-
-        }, function(e) {
-            alert('error');
-        });
 
 
     };
