@@ -422,7 +422,7 @@ document.addEventListener('deviceready', function() {
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
         //   wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6
 
-        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6", function() {
+        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
 
 
@@ -430,7 +430,7 @@ document.addEventListener('deviceready', function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
-                    navigator.notification.alert(id);
+                  
 
 
                 }, function(e) {
