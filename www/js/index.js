@@ -2,7 +2,7 @@ document.addEventListener('deviceready', function() {
 
     var homePage = $(".home").html();
     var login = $(".login").html();
-    $("#page").html(login);
+
 
 
 
@@ -28,9 +28,45 @@ document.addEventListener('deviceready', function() {
 
     $("#page").on("touchstart", "#register", function(e) {
 
-        $("#mainMenu").show();
-        $("#footer").show();
-        $("#page").html(injectHome);
+
+        var u = $("#nickName").val();
+        var e = $("#email").val();
+        var p = $("#userPassword").val();
+
+        if (u == "" || p == "" || e == "") {
+            $("#statusMsg").html("<br><p>You must enter all details to register!</p>").fadeIn();
+            return;
+        }
+
+
+
+        var user = new Parse.User();
+        user.set("username", u);
+        user.set("password", p);
+        user.set("email", e);
+
+        userDetails = {};
+        userDetails.u = u;
+        userDetails.p = p;
+        userDetails.e = e;
+
+
+
+        user.signUp(null, {
+            success: function(user) {
+                $("#page").html(injectHome);
+                $("#mainMenu").show();
+                $("#footer").show();
+
+                window.localStorage.setItem("user", JSON.stringify(userDetails));
+            },
+            error: function(user, error) {
+                //alert(JSON.stringify(error));
+                navigator.notification.alert(error.message);
+                //$("#regstatus").html(error.message).addClass("errorDiv");
+            }
+        });
+
 
     });
 
@@ -382,10 +418,25 @@ document.addEventListener('deviceready', function() {
 
 
     var init = function() {
+
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
-        //navigator.notification.alert("Init Fired...");
+        //   wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6
+
+        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6", function() {
 
 
+            alert('success');
+        }, function(e) {
+            alert('error');
+        });
+
+        if (window.localStorage.getItem("user")) {
+            $("#page").html(injectHome);
+            $("#mainMenu").show();
+            $("#footer").show();
+        } else {
+            $("#page").html(login);
+        }
 
 
 
