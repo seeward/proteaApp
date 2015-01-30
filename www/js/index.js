@@ -425,13 +425,18 @@ document.addEventListener('deviceready', function() {
         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "wLASDBHGKijymxvUeNo4qfaoKVGIQCpVsh4bqnr6", function() {
 
 
-            alert("Success!");
+
             parsePlugin.subscribe('SampleChannel', function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
+                    var installation = new Parse.Object("Installation");
+                    if (installation) {
+                        installation.set("installationId", id);
 
-                    alert(id);
+                        installation.save();
+                    }
+
 
                 }, function(e) {
                     alert('error');
