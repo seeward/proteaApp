@@ -387,11 +387,6 @@ document.addEventListener('deviceready', function() {
 
 
 
-            window.parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC", function() {
-        alert('success');
-    }, function(e) {
-        alert('error');
-    });
 
 
 
