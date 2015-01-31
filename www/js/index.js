@@ -651,7 +651,7 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-                 parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+                /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -668,7 +668,7 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
-
+*/
 
 
 
