@@ -29,9 +29,9 @@ document.addEventListener('deviceready', function() {
     var fixturesHtml2 = "<h4>March</h4><hr><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><hr><ul>";
     var url = "https://www.kimonolabs.com/api/8m7imhmo?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
-    var html = "<h4>Current ICC International Rankings</h4><hr><h4>Test</h4><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html2 = "<h4>ODI</h4><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html3 = "<h4>T20</h4><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html = "<h4>Current ICC International Rankings</h4><hr><h6>Test</h6><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html2 = "<h6>ODI</h6><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html3 = "<h6>T20</h6><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
     var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
 
     var injectHome = $(".home").html();
@@ -367,13 +367,14 @@ document.addEventListener('deviceready', function() {
 
 
 
-
     $("#footer").on("touchstart", "#home", function(e) {
         getBlocks();
         lastPage = currentPage;
         $("#page").html('');
         $("#page").scrollTop();
-        $("#page").html(injectHome);
+
+        var injectFeatures = $(".features").html();
+        $("#page").html(injectFeatures);
 
         $(".carousel-inner").swipe({
 
@@ -579,34 +580,58 @@ document.addEventListener('deviceready', function() {
 
 
 
-    var getBlocks = function() {
-        var adBlock = Parse.Object.extend("adBlock");
-        var query = new Parse.Query(adBlock);
-        query.find({
-            success: function(results) {
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    h = object.get('body');
-                }
 
-                $("#targetZone2").append(h)
+    var getBlocks = function() {
+
+                var leadUp = Parse.Object.extend("wcLeadUp");
+        var query3 = new Parse.Query(leadUp);
+        //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
+        query3.find({
+            success: function(results) {
+                for (var i3 = 0; i3 < results.length; i3++) {
+                    var object = results[i3];
+                    h3 = object.get('body');
+                }
+                $("#temp3").remove();
+                $("#targetZone1").append(h3)
             },
             error: function(error) {}
         });
+
+
         var feat = Parse.Object.extend("featuredPlayer");
         var query2 = new Parse.Query(feat);
+        //$("#targetZone3").append("<div id='temp2'>" + loader + "</div>");
+
         query2.find({
             success: function(results) {
                 for (var i2 = 0; i2 < results.length; i2++) {
                     var object = results[i2];
                     h2 = object.get('body');
                 }
+                 $("#temp2").remove();
                 $("#targetZone3").append(h2)
             },
             error: function(error) {
 
             }
         });
+
+        var adBlock = Parse.Object.extend("adBlock");
+        var query = new Parse.Query(adBlock);
+        //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
+        query.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    h = object.get('body');
+                }
+                $("#temp").remove();
+                $("#targetZone2").append(h)
+            },
+            error: function(error) {}
+        });
+        
 
     };
 
@@ -652,6 +677,11 @@ document.addEventListener('deviceready', function() {
         if (window.localStorage.getItem("user")) {
 
 
+
+            setTimeout(function(){
+                $("#helper").remove();
+            },6000);
+
             $("#page").html(injectHome);
             //pageQueue.push("injectHome");
             currentPage = injectHome;
@@ -661,7 +691,7 @@ document.addEventListener('deviceready', function() {
             $("#helper").show();
 
 
-            getBlocks();
+            
 
             $(".home").trigger("touchstart");
             if (device.platform == "iOS") {
