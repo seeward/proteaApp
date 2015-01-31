@@ -14,7 +14,7 @@
             "birthplace": "Place of Birth: South Africa",
             "birthdate": "DOB:  June 27, 1983",
             "nickname": "Nickname: Steyn Remover",
-            "img": "imgs/ds.jpg"
+            "img": "imgs/ds.png"
         }
 
     },
@@ -33,7 +33,7 @@
             "birthplace": "Place of Birth: South Africa",
             "birthdate": "DOB: February 17, 1984",
             "nickname": "Nickname: AB",
-            "img": "imgs/abd.jpg"
+            "img": "imgs/abd.png"
         }
 
     },
@@ -51,7 +51,7 @@
             "bowling": "Bowling: Leg Breaks",
             "birthdate": "DOB: July 13, 1984",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/fdp.jpg"
+            "img": "imgs/fdp.png"
         }
 
     },
@@ -70,7 +70,7 @@
             "nickname": "Nickname: Hash",
             "birthdate": "DOB: March 31, 1983",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/ha.jpg"
+            "img": "imgs/ha.png"
         }
 
     },
@@ -89,7 +89,7 @@
             "bowling": "Bowling: Leg Breaks",
             "birthdate": "DOB: March 27, 1979",
             "birthplace": "Place of Birth: Pakistan",
-            "img": "imgs/it.jpg"
+            "img": "imgs/it.png"
         }
 
     },
@@ -108,7 +108,7 @@
             "bowling": "Bowling: Leg Breaks",
             "birthdate": "DOB: April 14, 1984",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/jpd.jpg"
+            "img": "imgs/jpd.png"
         }
 
     },
@@ -126,7 +126,7 @@
             "bowling": "Bowling: Right arm, fast medium",
             "birthdate": "DOB: October 06, 1984",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/mm.jpg"
+            "img": "imgs/mm.png"
         }
 
     },
@@ -144,7 +144,7 @@
             "bowling": "Bowling: Leg Breaks",
             "birthdate": "DOB: December 17, 1992",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/qdk.jpg"
+            "img": "imgs/qdk.png"
         }
 
     },
@@ -163,7 +163,7 @@
             "bowling": "Bowling: Left arm, fast medium",
             "birthdate": "DOB: July 30, 1989",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/wp.jpg"
+            "img": "imgs/wp.png"
         }
 
     },
@@ -182,7 +182,7 @@
             "bowling": "Bowling: Right Arm Off-Break",
             "birthdate": "DOB: June 10, 1989",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/dm.jpg"
+            "img": "imgs/dm.png"
         }
 
     },
@@ -218,7 +218,7 @@
             "bowling": "Bowling: Right Arm Med-Fast",
             "birthdate": "DOB: June 18, 1987",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/ka.jpg"
+            "img": "imgs/ka.png"
         }
 
     },
@@ -236,7 +236,7 @@
             "bowling": "Bowling: Left Slow Orthodox",
             "birthdate": "DOB: January 21, 1984",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/ap.jpg"
+            "img": "imgs/ap.png"
         }
 
     },
@@ -255,7 +255,7 @@
             "bowling": "Bowling: Right arm, fast medium",
             "birthdate": "DOB: June 24, 1985",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/vp.jpg"
+            "img": "imgs/vp.png"
         }
     },
 
@@ -272,7 +272,7 @@
             "bowling": "Bowling: Right arm, fast medium",
             "birthdate": "DOB: June 24, 1992",
             "birthplace": "Place of Birth: South Africa",
-            "img": "imgs/rr.jpg"
+            "img": "imgs/rr.png"
         }
     }
 ]

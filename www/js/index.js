@@ -369,6 +369,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("#footer").on("touchstart", "#home", function(e) {
+        getBlocks();
         lastPage = currentPage;
         $("#page").html('');
         $("#page").scrollTop();
@@ -437,8 +438,16 @@ document.addEventListener('deviceready', function() {
 
 
         $.each(dt, function(ind, ob) {
-            htmlPlayers += "<li class='link' style='margin-bottom:10px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='pic' style='width:60px' src='" + ob.player.img + "'></div><h4>" + ob.player.name + "</h4><p>" + ob.player.role + "</p>" +
-                ob.player.birthdate + "</li>";
+
+            if (ob.player.name == "Farhaan Behardien") {
+                // alert("Behardien");
+                htmlPlayers += "<li class='link' style='margin-left:15px;height:100px;margin-bottom:40px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='pic' style='width:70px;' src='" + ob.player.img + "'></div><h4 style='margin-bottom:-4px'>" + ob.player.name + "</h4><p style='margin-bottom:-4px'>" + ob.player.role + "</p>" +
+                    "<p style='margin-bottom:55px'>" + ob.player.birthdate + "</p></li>";
+            } else {
+                htmlPlayers += "<li class='link' style='height:100px;margin-bottom:40px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='pic' style='width:100px;' src='" + ob.player.img + "'></div><h4 style='margin-bottom:-4px'>" + ob.player.name + "</h4><p style='margin-bottom:-4px'>" + ob.player.role + "</p>" +
+                    "<pstyle='margin-bottom:55px'>" + ob.player.birthdate + "</p></li>";
+            }
+
         });
 
 
@@ -466,7 +475,7 @@ document.addEventListener('deviceready', function() {
         var playerData = JSON.parse(d);
         var playerDetails = "<div class='container' style='padding:10px'>";
         playerDetails += "<h4>" + playerData.name + "</h4>";
-        playerDetails += "<img class='img-rounded' style='margin-top:10px' src='" + playerData.img + "' width='150'>";
+        playerDetails += "<img class='img-rounded' style='margin-top:10px' src='" + playerData.img + "' width='300'>";
         playerDetails += "<br><br><table class='table table-striped'>";
         playerDetails += "<tr><td>" + playerData.role + "</td></tr>";
         playerDetails += "<tr><td>" + playerData.birthdate + "</td></tr>";
@@ -570,6 +579,37 @@ document.addEventListener('deviceready', function() {
 
 
 
+    var getBlocks = function() {
+        var adBlock = Parse.Object.extend("adBlock");
+        var query = new Parse.Query(adBlock);
+        query.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    h = object.get('body');
+                }
+
+                $("#targetZone2").append(h)
+            },
+            error: function(error) {}
+        });
+        var feat = Parse.Object.extend("featuredPlayer");
+        var query2 = new Parse.Query(feat);
+        query2.find({
+            success: function(results) {
+                for (var i2 = 0; i2 < results.length; i2++) {
+                    var object = results[i2];
+                    h2 = object.get('body');
+                }
+                $("#targetZone3").append(h2)
+            },
+            error: function(error) {
+
+            }
+        });
+
+    };
+
 
     injectNews = $(".news").html();
 
@@ -621,47 +661,7 @@ document.addEventListener('deviceready', function() {
             $("#helper").show();
 
 
-            var adBlock = Parse.Object.extend("adBlock");
-            var query = new Parse.Query(adBlock);
-
-            query.find({
-                success: function(results) {
-
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        h = object.get('body');
-
-                    }
-
-                    $("#targetZone2").append(h)
-                },
-                error: function(error) {
-
-                }
-            });
-
-
-
-
-             var feat = Parse.Object.extend("featuredPlayer");
-            var query2 = new Parse.Query(feat);
-
-            query2.find({
-                success: function(results) {
-
-                    for (var i2 = 0; i2 < results.length; i2++) {
-                        var object = results[i2];
-                        h2 = object.get('body');
-
-                    }
-
-                    $("#targetZone3").append(h2)
-                },
-                error: function(error) {
-
-                }
-            });
-
+            getBlocks();
 
             $(".home").trigger("touchstart");
             if (device.platform == "iOS") {
