@@ -14,7 +14,7 @@
     <body>
         <style>
 
-        .wrapper {
+        body {
             diplay : none;
         }
 h4 {
@@ -157,31 +157,54 @@ ul li {
 #brand {
     display: none;
     position: fixed;
-    z-index:100;
-    top:5px;
-    left:12px;
+    z-index:8;
+    padding-left:12px;
+    padding-top:3px;
+    top:0px;
+    left:0px;
+    width:80px;
+    height:60px;
+    background-color: #ffcc00;
+    border-bottom-right-radius: 7px;
 }
 
-.wrapper {
-    position: absolute;
-    top:0;
-    left: 0;
-    width:100%;
-    height:100%;
-    padding:none;
-    margin:none;
+#brand img {
+    background-color: white;
+    padding:1px;
+    border-radius: 7px
 }
+
+
 
 .globalStatus {
 background-image: url("imgs/mascot.jpg");
 
 }
+
+#helper {
+    position:absolute;
+    z-index: 100;
+    display:block;
+    width:300px;
+    height:30px;
+    top:80px;
+    left:30px;
+    display: none;
+    background-color: white;
+    opacity: 0.7;
+    font-size: 22px;
+    padding: 0px;
+    padding-left:15px;
+    border-radius: 7px;
+    font-color:white;
+}
         </style>
 
         <div class="globalStatus"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
 
-<div class="wrapper">
+<div id="wrapper">
 <button id="backer" class="btn btn-xs btn-success"><</button>
+<div id="helper"><p>Swipe right --->></p></div>
 <div id="brand"><img src="imgs/48.png"></div>
 <div class='container'>
 
@@ -189,8 +212,6 @@ background-image: url("imgs/mascot.jpg");
 
 <div id='mainMenu'>
 
-
-  
     <div class="btn-group" >
 
     <button class='btn btn-success' type="button" id='players'>Squad</button>
@@ -212,8 +233,9 @@ background-image: url("imgs/mascot.jpg");
     <div class-"container">
 
         
+        
 <section>
- <div id="mainSlider" class="carousel slide" data-ride="carousel">
+ <div id="mainSlider" class="carousel slide" data-interval="false" data-ride="carousel">
       <!-- Indicators -->
      
 
@@ -232,12 +254,14 @@ background-image: url("imgs/mascot.jpg");
         </div>
 
         </div>
-        <div class="item" id="targetZone2">
-          <h4>Featured Player</h4><hr>
+        <div class="item" id="targetZone2" style="height:500px;overflow:scroll;webkit-overflow-scrolling: touch;">
+          <h4>Sponsers</h4><hr>
+
+
 
         </div>
-        <div class="item" id="targetZone3">
-          <h4>Latest Protea Post</h4><hr>
+        <div class="item" id="targetZone3" style="height:500px;overflow:scroll;webkit-overflow-scrolling: touch;">
+          <h4>Featured Player</h4><hr>
 
         </div>
       </div>
@@ -351,13 +375,14 @@ height:500px;
 
 
 
- 
+ </div>
       
 <script type="text/javascript" src="js/jq.js"></script>
+ <script type="text/javascript" src="js/hammer.js"></script>
          <script type="text/javascript" src="js/parse.js"></script>
         <script type="text/javascript" src="js/bs.js"></script>
           <link rel="stylesheet" href="js/bs.css" >
-        <script type="text/javascript" src="js/hammer.js"></script>
+       
         <script type="text/javascript" src="cordova.js"></script>
       
         <script type="text/javascript" src="js/index.js"></script>

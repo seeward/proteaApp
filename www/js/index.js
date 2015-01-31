@@ -1,10 +1,6 @@
 document.addEventListener('deviceready', function() {
 
 
-
-
-
-
     /*
      _    _____    ____  _____
     | |  / /   |  / __ \/ ___/
@@ -16,6 +12,10 @@ document.addEventListener('deviceready', function() {
 
 
 
+
+
+
+    var loader = "<div class='container'><img src='imgs/loader.gif'></div>";
     var homePage = $(".home").html();
     var login = $(".login").html();
     var pageQueue = [];
@@ -156,7 +156,7 @@ document.addEventListener('deviceready', function() {
 
     $("#mainMenu").on("touchstart", "#connect",
         function(e) {
-            $("#page").html("<div class='container'><h4>Loading...</h4></div>");
+            $("#page").html("<div class='container'><h4>Loading...</h4><br>" + loader + "</div>");
 
             $.ajax({
                 url: "http://proteafirefan.tumblr.com/api/read/json?num=50",
@@ -171,7 +171,8 @@ document.addEventListener('deviceready', function() {
 
                         if (o.type == "regular") {
                             console.log(JSON.stringify(o));
-                            hr += "<li class='tweets'>" + o['regular-body'] + "<div class='date'>" + o.date + "</div></li>";
+                            hr += "<li class='tweets'>" + o['regular-body'] + "<div class='date'>" + o.date.substr(0, 17); + " || " + o['regular-title'] + "</div></li>";
+
                         }
 
                         //if (o.type == "photo") {
@@ -307,7 +308,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("#footer").on("touchstart", "#rankings", function(e) {
-        $("#page").html('<h4>Loading current ICC Rankings</h4>');
+        $("#page").html('<h4>Loading current ICC Rankings</h4><br>' + loader);
 
 
 
@@ -344,7 +345,7 @@ document.addEventListener('deviceready', function() {
 
     $("#mainMenu").on("touchstart", "#news", function(e) {
         lastPage = currentPage;
-        $("#page").html('<h4>Loading latest News</h4>');
+        $("#page").html('<h4>Loading latest News</h4><br>' + loader);
         h = "<h4>Latest South African News</h4><ul>"
         $.ajax({
             url: "http://pipes.yahoo.com/pipes/pipe.run?_id=fb5976bfef39b2913e42671e86c505c5&_render=json",
@@ -563,6 +564,9 @@ document.addEventListener('deviceready', function() {
     }
 
 
+    $("body").on("touchstart", "#page", function() {
+        $("#helper").remove();
+    })
 
 
 
@@ -575,8 +579,6 @@ document.addEventListener('deviceready', function() {
 
 
 
-
-
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
 
         //window.localStorage.clear();
@@ -584,7 +586,7 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        /*         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -601,18 +603,67 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
+*/
+
+
 
 
 
         if (window.localStorage.getItem("user")) {
+
+
             $("#page").html(injectHome);
             //pageQueue.push("injectHome");
             currentPage = injectHome;
             $("#mainMenu").show();
             $("#footer").show();
             $("#brand").show();
+            $("#helper").show();
 
 
+            var adBlock = Parse.Object.extend("adBlock");
+            var query = new Parse.Query(adBlock);
+
+            query.find({
+                success: function(results) {
+
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        h = object.get('body');
+
+                    }
+
+                    $("#targetZone2").append(h)
+                },
+                error: function(error) {
+
+                }
+            });
+
+
+
+
+             var feat = Parse.Object.extend("featuredPlayer");
+            var query2 = new Parse.Query(feat);
+
+            query2.find({
+                success: function(results) {
+
+                    for (var i2 = 0; i2 < results.length; i2++) {
+                        var object = results[i2];
+                        h2 = object.get('body');
+
+                    }
+
+                    $("#targetZone3").append(h2)
+                },
+                error: function(error) {
+
+                }
+            });
+
+
+            $(".home").trigger("touchstart");
             if (device.platform == "iOS") {
                 $("#backer").show();
                 $("#mainMenu").css("margin-top", "25px");
@@ -620,24 +671,31 @@ document.addEventListener('deviceready', function() {
             }
         } else {
             $("#page").html(login);
+            $("#brand").show();
+            $("#helper").show();
         }
-        $("#brand").show();
+
+
         $(".globalStatus").remove();
-        $(".wrapper").fadeIn("slow");
+
+
+
+        $("#mainSpinner").carousel({
+            interval: false
+        });
+
+
+
+
         $(".carousel-inner").swipe({
             //Generic swipe handler for all directions
-
             swipeRight: function() {
+
                 $(this).parent().carousel('prev');
-                $("#mainSpinner").carousel({
-                    interval: false
-                });
             },
             //Default is 75px, set to 0 for demo so any distance triggers swipe
             threshold: 0
         });
-
-
     };
 
     init();
