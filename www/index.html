@@ -13,8 +13,13 @@
     </head>
     <body>
         <style>
+
+        .wrapper {
+            diplay : none;
+        }
 h4 {
     padding-left:10px;
+    padding-top:10px;
 }
 
 #proteasMain {
@@ -54,7 +59,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', end
 }
 
 
+.date {
+    font-size:12px;
 
+    margin-bottom:-10px;
+    text-decoration: small-caps;
+
+}
 
 img {
     z-index: 8;
@@ -80,7 +91,18 @@ img {
     width: 100%;
 }
 
+.tweets {
+    margin-top:15px;
+    margin-bottom: 15px;
+    border-bottom:2px solid black;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 20px
+}
 
+.tweets img {
+    margin: 5px;
+}
 
 
 ul {
@@ -111,7 +133,12 @@ ul li {
     z-index: 28
 }
 
+.box {
+    display:block;
+    width:100%;
+    background:green;
 
+}
 
 #header {
     display: block;
@@ -128,13 +155,32 @@ ul li {
 }
 
 #brand {
+    display: none;
     position: fixed;
     z-index:100;
     top:5px;
-    left: 5px;
+    left:12px;
+}
+
+.wrapper {
+    position: absolute;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100%;
+    padding:none;
+    margin:none;
+}
+
+.globalStatus {
+background-image: url("imgs/mascot.jpg");
+
 }
         </style>
 
+        <div class="globalStatus"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+
+<div class="wrapper">
 <button id="backer" class="btn btn-xs btn-success"><</button>
 <div id="brand"><img src="imgs/48.png"></div>
 <div class='container'>
@@ -165,19 +211,59 @@ ul li {
 <div class="home" style='position:absolute;left:-11000px'>
     <div class-"container">
 
-        <div class="row" style='margin-top:20px;margin-left:10px'>
+        
+<section>
+ <div id="mainSlider" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+     
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active" id="targetZone1">
+         <div class="row" style='margin-top:20px;margin-left:10px'>
             <img id='proteasMain' class='img-rounded img-responsive' src='imgs/proteas.jpg' />
         </div>
-
-        
-
-                <div class="row" style='margin-top:20px;text-align:center;color:green'>
-            <h4 style='font-size:32px'>Welcome to Protea Fire!</h4>
+        <div class="row" style='margin-top:20px;text-align:center;color:green'>
+            <h4 style='font-size:30px'>Welcome to Protea Fire!</h4>
             <p style="margin-top:-15px">Your place for Proteas World Cup Fever</p>
             <noscript>
             <div id="adBlock" style="background-color:#c1c1c1;margin-top:25px;height:60px;width:320px;color:grey;border-top:1px solid #c1c1c1;margin-left:35px"><p><br>ADBLOCK INSERTED HERE</p></div>
         </noscript>
         </div>
+
+        </div>
+        <div class="item" id="targetZone2">
+          <h4>Featured Player</h4><hr>
+
+        </div>
+        <div class="item" id="targetZone3">
+          <h4>Latest Protea Post</h4><hr>
+
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+<style>
+.carousel-control {
+    background-image: none!important
+}
+
+.carousel-inner {
+height:500px;
+}
+</style>
+  </div>
+</section>
+        
+
                 
     </div>
 
@@ -188,8 +274,7 @@ ul li {
     
 
   
-<!--Pulling Awesome Font -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 <div class="container">
 
@@ -197,7 +282,7 @@ ul li {
         <div class="col-md-offset-5 col-md-3">
             <div class="form-login">
             
-            <p>Join the Proteas Family by registering below!</p>
+            <p style="margin-top:35px">Join the Proteas Family by registering below!</p>
             <input type="text" id="nickName" class="form-control input-sm chat-input" placeholder="Username" />
             </br>
             <input type="text" id="email" class="form-control input-sm chat-input" placeholder="Email" />
@@ -206,7 +291,7 @@ ul li {
             </br>
 
 
-            <div class="wrapper">
+            <div class="wrapper2">
             <span class="group-btn">     
                 <a href="#" id="register" class="btn btn-success btn-block">Register <i class="fa fa-sign-in"></i></a>
             </span>
@@ -230,7 +315,7 @@ ul li {
 <div class="connect" style="position:absolute;left:-11000px"></div>
 <div class="records" style="position:absolute;left:-11000px">
     <div class="container">
-    <h4>Proteas World Cup Records</h4>
+    <h4>Proteas World Cup Records</h4><hr>
 
 
 
@@ -262,13 +347,17 @@ ul li {
 
 </div>
 
+
+
+
+
  
       
 <script type="text/javascript" src="js/jq.js"></script>
          <script type="text/javascript" src="js/parse.js"></script>
         <script type="text/javascript" src="js/bs.js"></script>
           <link rel="stylesheet" href="js/bs.css" >
-
+        <script type="text/javascript" src="js/hammer.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
       
         <script type="text/javascript" src="js/index.js"></script>

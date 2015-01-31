@@ -1,25 +1,51 @@
 document.addEventListener('deviceready', function() {
 
+
+
+
+
+
+    /*
+     _    _____    ____  _____
+    | |  / /   |  / __ \/ ___/
+    | | / / /| | / /_/ /\__ \ 
+    | |/ / ___ |/ _, _/___/ / 
+    |___/_/  |_/_/ |_|/____/  
+                              
+*/
+
+
+
     var homePage = $(".home").html();
     var login = $(".login").html();
     var pageQueue = [];
     var currentPage = "";
     var lastPage = "init";
+
+
+    var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
+    var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><hr><button id='sort' class='btn btn-block btn-success'>Proteas Games</button>";
+    var fixturesHtml = htmlFixtures + "<h4>Feb</h4><hr><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
+    var fixturesHtml2 = "<h4>March</h4><hr><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
+    var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><hr><ul>";
+    var url = "https://www.kimonolabs.com/api/8m7imhmo?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
+    var html = "<h4>Current ICC International Rankings</h4><hr><h4>Test</h4><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html2 = "<h4>ODI</h4><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html3 = "<h4>T20</h4><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
+
+    var injectHome = $(".home").html();
+
+
+
+
+
     document.addEventListener("backbutton", function(e) {
 
-        if (lastPage == "init") {
-            return
-        } else {
-            $("#page").html(lastPage);
-        }
     }, true);
 
     $("body").on("touchstart", "#backer", function(e) {
-        if (lastPage == "init") {
-            return
-        } else {
-            $("#page").html(lastPage);
-        }
+
     });
 
 
@@ -30,18 +56,7 @@ document.addEventListener('deviceready', function() {
 
     });
 
-    var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
-    var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><button id='sort' class='btn btn-block btn-success'>Proteas Games</button>";
-    var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
-    var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
-    var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><ul>";
-    var url = "https://www.kimonolabs.com/api/8m7imhmo?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
-    var html = "<h4>Current ICC International Rankings</h4><h4>Test</h4><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html2 = "<h4>ODI</h4><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html3 = "<h4>T20</h4><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var htmlVids = "<h4>Protea Fire Videos</h4><ul>";
 
-    var injectHome = $(".home").html();
 
     $("#page").on("touchstart", "#register", function(e) {
 
@@ -71,6 +86,18 @@ document.addEventListener('deviceready', function() {
             success: function(user) {
 
                 $("#page").html(injectHome);
+                $(".carousel-inner").swipe({
+                    //Generic swipe handler for all directions
+
+                    swipeRight: function() {
+                        $(this).parent().carousel('prev');
+                        $("#mainSpinner").carousel({
+                            interval: false
+                        });
+                    },
+                    //Default is 75px, set to 0 for demo so any distance triggers swipe
+                    threshold: 0
+                });
                 $("#mainMenu").show();
                 $("#footer").show();
                 currentPage = injectHome;
@@ -86,9 +113,7 @@ document.addEventListener('deviceready', function() {
 
     });
 
-    injectNews = $(".news").html();
 
-    injectRecords = $(".records").html();
 
     $("#page").on("touchstart", "#bestBattingInnings",
         function(e) {
@@ -125,9 +150,13 @@ document.addEventListener('deviceready', function() {
         });
 
 
+    $("#page").on("touchstart", "#refresh", function() {
+        $("#connect").trigger("touchstart");
+    });
+
     $("#mainMenu").on("touchstart", "#connect",
         function(e) {
-            $("#page").html("");
+            $("#page").html("<div class='container'><h4>Loading...</h4></div>");
 
             $.ajax({
                 url: "http://proteafirefan.tumblr.com/api/read/json?num=50",
@@ -137,26 +166,32 @@ document.addEventListener('deviceready', function() {
                     eval(data);
                     var reData = tumblr_api_read;
                     console.log(reData.posts);
-                    var hr = "<ul>";
+                    var hr = "<h4>#proteaFire Social Media Feed</h4><hr><ul>";
                     $.each(reData.posts, function(i, o) {
 
                         if (o.type == "regular") {
-                            //alert(o['regular-body']);
-                            hr += "<li><h4>"+o['regular-title']+"</h4>"+o['regular-body']+"</li>";
+                            console.log(JSON.stringify(o));
+                            hr += "<li class='tweets'>" + o['regular-body'] + "<div class='date'>" + o.date + "</div></li>";
                         }
 
+                        //if (o.type == "photo") {
+                        // alert(JSON.stringify(o));
+                        // hr += "<li><div class='box'><img src='"+o['photo-url-250']+"'></div></li>";
+                        //}
 
-                        if (o.type == "quote") {
-                            hr += "<li><h4>"+o['quote-text']+"</h4></li>";
-                        }
+
+
+
+
 
                     });
 
                     hr += "</ul>";
 
-
+                    hd = "<button class='btn btn-success btn-xs pull-right' id='refresh' style='position:static'>refresh</button>";
                     $("#page").scrollTop();
                     $("#page").html(hr);
+                    $("#page").prepend(hd).fadeIn(2000);
                 }
 
             );
@@ -262,6 +297,7 @@ document.addEventListener('deviceready', function() {
 
     $("#footer").on("touchstart", "#videos", function(e) {
         lastPage = currentPage;
+
         $("#page").html('');
         $("#page").scrollTop();
         $("#page").html(injectVids);
@@ -271,8 +307,14 @@ document.addEventListener('deviceready', function() {
 
 
     $("#footer").on("touchstart", "#rankings", function(e) {
+        $("#page").html('<h4>Loading current ICC Rankings</h4>');
+
+
+
+
+
         lastPage = currentPage;
-        $("#page").html('');
+
         $("#page").scrollTop();
         $("#page").html(injectRank);
         currentPage = injectRank;
@@ -323,11 +365,25 @@ document.addEventListener('deviceready', function() {
     });
 
 
+
+
     $("#footer").on("touchstart", "#home", function(e) {
         lastPage = currentPage;
         $("#page").html('');
         $("#page").scrollTop();
         $("#page").html(injectHome);
+
+        $(".carousel-inner").swipe({
+
+
+            swipeRight: function() {
+                $(this).parent().carousel('prev');
+
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold: 0
+        });
+
         currentPage = injectHome;
 
     });
@@ -424,49 +480,86 @@ document.addEventListener('deviceready', function() {
 
 
 
-
-
     });
 
 
 
-    $.getJSON(url, processData2);
+    var getRankings = function() {
+        $.getJSON(url, processData2);
 
-    function processData2(data) {
-        //console.log(JSON.stringify(data));
+        function processData2(data) {
+            //console.log(JSON.stringify(data));
 
-        $.each(data.results.test, function(i, o) {
-            //console.log(JSON.stringify(o));
-            html += "<tr><td>" + o.test_team + "</td><td>" + o.test_matches + "</td><td>" + o.test_points + "</td><td>" + o.test_rating + "</td></tr>";
+            $.each(data.results.test, function(i, o) {
+                //console.log(JSON.stringify(o));
 
-        });
+                if (o.test_team == "South Africa") {
+                    html += "<tr class='success'><td>" + o.test_team + "</td><td>" + o.test_matches + "</td><td>" + o.test_points + "</td><td>" + o.test_rating + "</td></tr>";
 
+                } else {
+                    html += "<tr><td>" + o.test_team + "</td><td>" + o.test_matches + "</td><td>" + o.test_points + "</td><td>" + o.test_rating + "</td></tr>";
 
+                }
 
-
-
-        $.each(data.results.odi, function(i, o) {
-            //console.log(JSON.stringify(o));
-            html2 += "<tr><td>" + o.odi_team + "</td><td>" + o.odi_matches + "</td><td>" + o.odi_points + "</td><td>" + o.odi_rating + "</td></tr>";
-
-        });
+            });
 
 
 
-        $.each(data.results.T20, function(i, o) {
-            //console.log(JSON.stringify(o));
-            html3 += "<tr><td>" + o.t20_team + "</td><td>" + o.t20_matches + "</td><td>" + o.t20_points + "</td><td>" + o.t20_rating + "</td></tr>";
-
-        });
-
-        html += "</table>";
-        html2 += "</table>";
-        html3 += "</table>";
 
 
-        $(".rankings").html(html + html2 + html3);
-        injectRank = $(".rankings").html()
+            $.each(data.results.odi, function(i, o) {
+                //console.log(JSON.stringify(o));
 
+                if (o.odi_team == "South Africa") {
+                    html2 += "<tr class='success'><td>" + o.odi_team + "</td><td>" + o.odi_matches + "</td><td>" + o.odi_points + "</td><td>" + o.odi_rating + "</td></tr>";
+
+                } else {
+                    html2 += "<tr><td>" + o.odi_team + "</td><td>" + o.odi_matches + "</td><td>" + o.odi_points + "</td><td>" + o.odi_rating + "</td></tr>";
+
+                }
+
+            });
+
+
+
+            $.each(data.results.T20, function(i, o) {
+                //console.log(JSON.stringify(o));
+                if (o.t20_team == "South Africa") {
+                    html3 += "<tr class='success'><td>" + o.t20_team + "</td><td>" + o.t20_matches + "</td><td>" + o.t20_points + "</td><td>" + o.t20_rating + "</td></tr>";
+
+                } else {
+                    html3 += "<tr><td>" + o.t20_team + "</td><td>" + o.t20_matches + "</td><td>" + o.t20_points + "</td><td>" + o.t20_rating + "</td></tr>";
+
+                }
+            });
+
+            html += "</table>";
+            html2 += "</table>";
+            html3 += "</table>";
+
+
+            $(".rankings").html(html + html2 + html3);
+            injectRank = $(".rankings").html()
+
+        }
+
+    };
+
+
+    var getVideos = function() {
+        $.getJSON("videos.json", parseData);
+
+        function parseData(data) {
+            $.each(data, function(ind, obj) {
+                htmlVids += "<li><h4>" + obj.video.text + "</h4><iframe width='100%' height='215' src='http://www.youtube.com/embed/" + obj.video.href + "?rel=0&amp;controls=0&amp;showinfo=0' frameborder='0' allowfullscreen></iframe></li>";
+            });
+
+
+            htmlVids += "</ul>";
+
+            $(".videos").html(htmlVids);
+            injectVids = $(".videos").html();
+        };
     }
 
 
@@ -474,27 +567,24 @@ document.addEventListener('deviceready', function() {
 
 
 
-    $.getJSON("videos.json", parseData);
+    injectNews = $(".news").html();
 
-    function parseData(data) {
-        $.each(data, function(ind, obj) {
-            htmlVids += "<li><h4>" + obj.video.text + "</h4><iframe width='100%' height='215' src='http://www.youtube.com/embed/" + obj.video.href + "?rel=0&amp;controls=0&amp;showinfo=0' frameborder='0' allowfullscreen></iframe></li>";
-        });
-
-
-        htmlVids += "</ul>";
-
-        $(".videos").html(htmlVids);
-        injectVids = $(".videos").html();
-    };
-
+    injectRecords = $(".records").html();
 
     var init = function() {
 
+
+
+
+
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
 
+        //window.localStorage.clear();
 
-                parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        getVideos();
+        getRankings();
+
+        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -512,7 +602,7 @@ document.addEventListener('deviceready', function() {
           
         });
 
-
+*/
 
         if (window.localStorage.getItem("user")) {
             $("#page").html(injectHome);
@@ -520,6 +610,8 @@ document.addEventListener('deviceready', function() {
             currentPage = injectHome;
             $("#mainMenu").show();
             $("#footer").show();
+            $("#brand").show();
+
 
             if (device.platform == "iOS") {
                 $("#backer").show();
@@ -529,8 +621,21 @@ document.addEventListener('deviceready', function() {
         } else {
             $("#page").html(login);
         }
+        $("#brand").show();
+        $(".globalStatus").remove();
+        $(".wrapper").fadeIn("slow");
+        $(".carousel-inner").swipe({
+            //Generic swipe handler for all directions
 
-
+            swipeRight: function() {
+                $(this).parent().carousel('prev');
+                $("#mainSpinner").carousel({
+                    interval: false
+                });
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold: 0
+        });
 
 
     };
