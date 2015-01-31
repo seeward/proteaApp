@@ -25,13 +25,13 @@ document.addEventListener('deviceready', function() {
 
     var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
     var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><hr><button id='sort' class='btn btn-block btn-success'>Proteas Games</button>";
-    var fixturesHtml = htmlFixtures + "<h4>Feb</h4><hr><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
-    var fixturesHtml2 = "<h4>March</h4><hr><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
+    var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
+    var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><hr><ul>";
     var url = "https://www.kimonolabs.com/api/8m7imhmo?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
-    var html = "<h4>Current ICC International Rankings</h4><hr><h6>Test</h6><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html2 = "<h6>ODI</h6><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html3 = "<h6>T20</h6><hr><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html = "<h4>Current ICC International Rankings</h4><hr><h6>Test</h6><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html2 = "<h6>ODI</h6><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+    var html3 = "<h6>T20</h6><table class='table table-striped'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
     var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
 
     var injectHome = $(".home").html();
@@ -367,11 +367,19 @@ document.addEventListener('deviceready', function() {
 
 
 
+
     $("#footer").on("touchstart", "#home", function(e) {
         getBlocks();
         lastPage = currentPage;
         $("#page").html('');
         $("#page").scrollTop();
+
+
+        setTimeout(function() {
+
+            $("#helper").fadeIn().delay(3000).fadeOut();;
+        }, 5000);
+
 
         var injectFeatures = $(".features").html();
         $("#page").html(injectFeatures);
@@ -575,7 +583,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("body").on("touchstart", "#page", function() {
-        $("#helper").remove();
+        //$("#helper").remove();
     })
 
 
@@ -583,7 +591,7 @@ document.addEventListener('deviceready', function() {
 
     var getBlocks = function() {
 
-                var leadUp = Parse.Object.extend("wcLeadUp");
+        var leadUp = Parse.Object.extend("wcLeadUp");
         var query3 = new Parse.Query(leadUp);
         //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
         query3.find({
@@ -609,7 +617,7 @@ document.addEventListener('deviceready', function() {
                     var object = results[i2];
                     h2 = object.get('body');
                 }
-                 $("#temp2").remove();
+                $("#temp2").remove();
                 $("#targetZone3").append(h2)
             },
             error: function(error) {
@@ -631,7 +639,7 @@ document.addEventListener('deviceready', function() {
             },
             error: function(error) {}
         });
-        
+
 
     };
 
@@ -651,7 +659,7 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-                /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -678,9 +686,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-            setTimeout(function(){
-                $("#helper").remove();
-            },6000);
+           
 
             $("#page").html(injectHome);
             //pageQueue.push("injectHome");
@@ -688,12 +694,12 @@ document.addEventListener('deviceready', function() {
             $("#mainMenu").show();
             $("#footer").show();
             $("#brand").show();
-            $("#helper").show();
 
 
-            
 
-            $(".home").trigger("touchstart");
+
+
+            //$(".home").trigger("touchstart");
             if (device.platform == "iOS") {
                 $("#backer").show();
                 $("#mainMenu").css("margin-top", "25px");
@@ -702,7 +708,7 @@ document.addEventListener('deviceready', function() {
         } else {
             $("#page").html(login);
             $("#brand").show();
-            $("#helper").show();
+            //$("#helper").show();
         }
 
 
