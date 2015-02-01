@@ -75,7 +75,7 @@ img {
         #page {
     -webkit-overflow-scrolling: touch;
             position:absolute;
-            top:48px;
+            top:55px;
             width:95%;
             padding:0px;
 
@@ -123,7 +123,7 @@ ul li {
 
 .newsItem {
     padding:5px;
-    font-size:25px;
+    font-size:16px;
 }
 
 #backer {
@@ -189,6 +189,10 @@ ul li {
     background-color: white;
     border-radius: 7px;
     padding:10px;
+    z-index: 111;
+    border-radius: 7px;
+    box-shadow: 0 0 7px black;
+
 
 }
 
@@ -210,7 +214,13 @@ ul li {
     color:white;
 }
 
+#wcLauncher {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius:0;
+    border-top-right-radius:0;
+    border-top-left-radius:0;
 
+}
 
         </style>
 
@@ -232,7 +242,7 @@ ul li {
     <div class="btn-group" >
 
     
-    <button class='btn btn-success btn-block' type="button" id='wcLauncher'>World Cup 2015</button>
+    <button class='btn btn-success btn-block' type="button" id='wcLauncher'><img src="imgs/wc_logo.jpg" width="50"></button>
     
 
     
@@ -350,8 +360,9 @@ height:500px;
 </div>
 
 
-<div class='wcMenu' style='display:none;position:absolute;left:100px;right:0px;top:45px'>
+<div class='wcMenu' style='display:none;position:fixed;left:80px;top:0px'>
     <div class="container">
+        <p>World Cup 2015</p><hr>
             <button class="btn btn-success btn-block" id="fixtures">Fixtures</button>
     <button class="btn btn-success btn-block" id="resultsLog">Results Log</button>
 
@@ -360,7 +371,53 @@ height:500px;
         </div>
 </div>
 
+<div class='settings' style='position:absolute;left:-11000px'>
+    
 
+<fieldset>
+
+<!-- Form Name -->
+<h4>Protea Fire Settings</h4>
+
+
+<div class="form-group">
+
+  <div class="col-md-4">
+  
+  <div class="checkbox">
+    <label for="checkboxes-1">
+      <input type="checkbox" name="checkboxes" id="pushSetting" value="1">
+      Receive Notifications
+    </label>
+    </div>
+
+
+
+      <div class="checkbox">
+    <label for="checkboxes-2">
+      <input type="checkbox" name="checkboxes" id="emailSetting" value="1">
+      Receive Email updates
+    </label>
+    </div>
+
+
+
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="save" name="save" class="btn btn-success">Save</button>
+    <button id="logout" name="logout" class="btn btn-danger">Log Out</button>
+  </div>
+</div>
+
+</fieldset>
+
+
+</div>
 
 
 

@@ -467,7 +467,7 @@ document.addEventListener('deviceready', function() {
 
         }).done(function(data) {
             $.each(data.value.items, function(i, o) {
-                h += "<li class='newsItem'><a style='color:#007E45' href='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
+                h += "<li class='newsItem'><a style='color:#007E45' target='_blank' href='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
             });
 
 
@@ -483,8 +483,9 @@ document.addEventListener('deviceready', function() {
     var helperTag = false;
 
     $("#footer").on("touchstart", "#settings", function(e) {
-        alert("Settings Page will go here...");
-
+       
+       var settings = $(".settings").html();
+       $("#page").html(settings);
 
     });
 
@@ -502,7 +503,7 @@ document.addEventListener('deviceready', function() {
                 $("#helper").fadeIn().delay(1000).fadeOut();;
             }, 5000);
 
-            helperTag = true;
+            
         }
         $(".wcMenu").hide();
         var injectFeatures = $(".features").html();
@@ -513,6 +514,7 @@ document.addEventListener('deviceready', function() {
 
             swipeRight: function() {
                 $(this).parent().carousel('prev');
+                helperTag = true;
 
             },
             //Default is 75px, set to 0 for demo so any distance triggers swipe
@@ -818,6 +820,11 @@ document.addEventListener('deviceready', function() {
     var wcLogsUrl = "https://www.kimonolabs.com/api/8wqdzeqg?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
 
 
+$("#page").on("touchstart","#save",function(){
+window.localStorage.clear();
+$("#page").html(injectHome);
+});
+
 
     var init = function() {
 
@@ -850,7 +857,7 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -867,7 +874,7 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
-*/
+
 
 
 
