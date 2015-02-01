@@ -154,7 +154,9 @@ document.addEventListener('deviceready', function() {
         $("#connect").trigger("touchstart");
     });
 
-    $("#mainMenu").on("touchstart", "#connect",
+
+
+    $("#footer").on("touchstart", "#connect",
         function(e) {
             $("#page").html("<div class='container'><h4>Loading...</h4><br>" + loader + "</div>");
 
@@ -253,6 +255,56 @@ document.addEventListener('deviceready', function() {
 
     });
 
+
+
+
+
+
+
+
+
+    $("#page").on("touchstart", "#wicketPartnerships", function() {
+        lastPage = injectRecords;
+
+        $.getJSON("wicketPartnerships.json", function(data5) {
+            i = "<div class='container'><h4>Highest Wkt Parternships in the WC</h4><table class='table table-striped'>";
+            i += "<tr><th>Wkt</th><th>Rns</th><th>Plyrs</th><th>Mtch</th><th>Yr</th></tr>";
+
+            $.each(data5, function(er, o) {
+                i += "<tr><td>" + o.wicket + "</td><td>" + o.runs + "</td><td>" + o.players + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
+            });
+
+            i += "</table></div>";
+            $("#page").scrollTop();
+            $("#page").html(i);
+        });
+    });
+
+
+
+
+
+
+
+
+
+    $("#page").on("touchstart", "#runsConceded", function() {
+        lastPage = injectRecords;
+
+        $.getJSON("mostRunsConceded.json", function(data4) {
+            i = "<div class='container'><h4>Most Runs Conceded in the WC</h4><table class='table table-striped'>";
+            i += "<tr><th>Score</th><th>Player</th><th>Match</th><th>Year</th></tr>";
+
+            $.each(data4, function(er, o) {
+                i += "<tr><td>" + o.score + "</td><td>" + o.bowler.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
+            });
+
+            i += "</table></div>";
+            $("#page").scrollTop();
+            $("#page").html(i);
+        });
+    });
+
     $("#page").on("touchstart", "#mostWickets", function(e) {
         lastPage = injectRecords;
         $.getJSON("mostWickets.json", function(data2) {
@@ -286,7 +338,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-    $("#mainMenu").on("touchstart", "#players", function(e) {
+    $("#footer").on("touchstart", "#players", function(e) {
         lastPage = currentPage;
         //alert($(".players").html());
         $("#page").html('');
@@ -343,7 +395,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-    $("#mainMenu").on("touchstart", "#news", function(e) {
+    $("#footer").on("touchstart", "#news", function(e) {
         lastPage = currentPage;
         $("#page").html('<h4>Loading latest News</h4><br>' + loader);
         h = "<h4>Latest South African News</h4><ul>"
@@ -366,7 +418,7 @@ document.addEventListener('deviceready', function() {
     });
 
 
-
+var helperTag = false;
 
     $("#footer").on("touchstart", "#home", function(e) {
         getBlocks();
@@ -374,11 +426,16 @@ document.addEventListener('deviceready', function() {
         $("#page").html('');
         $("#page").scrollTop();
 
+        if (helperTag == false) {
+            setTimeout(function() {
 
-        setTimeout(function() {
+                $("#helper").fadeIn().delay(1000).fadeOut();;
+            }, 5000);
 
-            $("#helper").fadeIn().delay(3000).fadeOut();;
-        }, 5000);
+            helperTag = true;
+        }
+
+
 
 
         var injectFeatures = $(".features").html();
@@ -648,31 +705,24 @@ document.addEventListener('deviceready', function() {
 
     injectRecords = $(".records").html();
 
-    var offLine = function(){
-        alert("off");
-    };
 
-    var onLine = function(){
-alert("on");
-    };
+
+    var wcLogsUrl = "https://www.kimonolabs.com/api/8wqdzeqg?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
 
 
 
     var init = function() {
-  document.addEventListener("offline", offLine, false);
-  document.addEventListener("online", function(){
-    alert("on");
-  }, false);
+
 
 
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
-        
+
         var dimensions = {
-            model : device.model,
-            platform : device.platform
+            model: device.model,
+            platform: device.platform
         };
 
-        
+
         Parse.Analytics.track('appLaunch', dimensions);
 
 
@@ -680,8 +730,6 @@ alert("on");
 
 
         //window.localStorage.clear();
-
-
 
 
 

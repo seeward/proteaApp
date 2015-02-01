@@ -8,7 +8,7 @@
         
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
       
-       
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <title>Protea Fire</title>
     </head>
     <body>
@@ -222,10 +222,10 @@ ul li {
 
     <div class="btn-group" >
 
-    <button class='btn btn-success' type="button" id='players'>Squad</button>
+    
     <button class='btn btn-success' type="button" id='fixtures'>WC 2015</button>
-    <button class='btn btn-success' type="button" id='news'>News</button>
-    <button class='btn btn-success' type="button" id='connect'>Connect</button>
+    
+
     
     </div>
     </div>
@@ -266,27 +266,21 @@ ul li {
       <div class="carousel-inner">
 
         <div class="item" id="targetZone2" style="width:100%;height:100%;overflow-x:hidden;webkit-overflow-scrolling: touch;">
-          <h4>Sponsers</h4><hr><div id="temp"><h4>Loading...</h4><img style="margin-left:100px" src="imgs/loader.gif"></div>
+          <div id="temp"><h4>Loading...</h4><img style="margin-left:100px" src="imgs/loader.gif"></div>
 
 
         </div>
         <div class="item" id="targetZone1" style="height:100%;width:100%;overflow-x:hidden;webkit-overflow-scrolling: touch;">
-<h4>Featured Video</h4><hr><div id="temp3"><h4>Loading...</h4><img style="margin-left:100px" src="imgs/loader.gif"></div>
+<div id="temp3"><h4>Loading...</h4><img style="margin-left:100px" src="imgs/loader.gif"></div>
         </div>
         
         <div class="item active" id="targetZone3" style="width:100%;height:100%;overflow-x:hidden;webkit-overflow-scrolling: touch;">
-          <h4>Featured Player</h4><hr><div id="temp2"><h4>Loading...</h4><img style="margin-left:100px"src="imgs/loader.gif"></div>
+          <div id="temp2"><h4>Loading...</h4><img style="margin-left:100px"src="imgs/loader.gif"></div>
 
         </div>
       </div>
 
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
+    
     </div>
 
 <style>
@@ -366,6 +360,8 @@ height:500px;
 <button class="btn btn-block btn-success" id="mostWickets">Most Wickets</button>
 <button class="btn btn-block btn-success" id="bestBowlingInnings">Best Bowling Innings</button>
 <button class="btn btn-block btn-success" id="bowlingCareer">Bowling Career by Player</button>
+<button class="btn btn-block btn-success" id="runsConceded">Most Runs Conceded</button>
+<button class="btn btn-block btn-success" id="wicketPartnerships">Highest Wkt Partnerships</button>
 
 
 </div>
@@ -373,16 +369,26 @@ height:500px;
 
 </div>
 
-<div id="footer" style="position:fixed;z-index:22;left:0px;bottom:0px;width:100%">
+<div id="footer" style="position:fixed;z-index:22;left:0px;bottom:0px;width:100%;padding-left:7px">
     
- <div style="margin-left:18px;width:100%">
+ <div style="width:100%">
 
-    <button class='btn btn-success' type="button" id='videos'>Videos</button>
-    <button class='btn btn-success' type="button" id='records'>Stats</button>
-    <button class='btn btn-success' type="button" id='rankings'>Rankings</button>
- <button class='btn btn-success' type="button" id='home'>Features</button>
+      <button class='btn btn-success' type="button" id='home'><span class="glyphicon glyphicon-fire"></span></button>
+      
+<button class='btn btn-success' type="button" id='players'><span class="glyphicon glyphicon-user"></span></button>
+    <button class='btn btn-success' type="button" id='videos'><span class="glyphicon glyphicon-film"></span></button>
+    <button class='btn btn-success' type="button" id='records'><span class="glyphicon glyphicon-stats"></span></button>
+    <button class='btn btn-success' type="button" id='rankings'><span class="glyphicon glyphicon-th-list"></span></button>
+
+     <button class='btn btn-success' type="button" id='connect'><span class="glyphicon glyphicon-thumbs-up"></span></button>
+     <button class='btn btn-success' type="button" id='news'><span class="glyphicon glyphicon-inbox"></span></button>
+
+
+            <button class='btn btn-success' type="button" id='settings'><span class="glyphicon glyphicon-cog"></span></button>
 
     </div>
+
+
 
 
 </div>
