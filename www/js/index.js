@@ -483,9 +483,9 @@ document.addEventListener('deviceready', function() {
     var helperTag = false;
 
     $("#footer").on("touchstart", "#settings", function(e) {
-       
-       var settings = $(".settings").html();
-       $("#page").html(settings);
+
+        var settings = $(".settings").html();
+        $("#page").html(settings);
 
     });
 
@@ -503,7 +503,7 @@ document.addEventListener('deviceready', function() {
                 $("#helper").fadeIn().delay(1000).fadeOut();;
             }, 5000);
 
-            
+
         }
         $(".wcMenu").hide();
         var injectFeatures = $(".features").html();
@@ -820,8 +820,31 @@ document.addEventListener('deviceready', function() {
     var wcLogsUrl = "https://www.kimonolabs.com/api/8wqdzeqg?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
 
 
+    $("#page").on("touchstart", "#logout", function() {
+        window.localStorage.clear();
+        $("body").html("You are logged out... we will miss you...");
+    });
+
 $("#page").on("touchstart","#save",function(){
-window.localStorage.clear();
+
+    if($("#pushSetting").is(":checked")){
+
+parsePlugin.subscribe('optIn', function() {
+
+                parsePlugin.getInstallationId(function(id) {
+
+                }, function(e) {
+
+                    $("#page").html(injectHome);
+
+                });
+
+            }
+
+
+
+
+    }
 $("#page").html(injectHome);
 });
 
@@ -857,22 +880,22 @@ $("#page").html(injectHome);
         getVideos();
         getRankings();
 
-         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
                 }, function(e) {
-                   
+
                 });
 
             }, function(e) {
-               
+
             });
 
         }, function(e) {
-          
+
         });
 
 
