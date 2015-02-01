@@ -648,11 +648,25 @@ document.addEventListener('deviceready', function() {
 
     injectRecords = $(".records").html();
 
-    var init = function() {
+    var offLine = function(){
+        alert("off");
+    };
 
+    var onLine = function(){
+alert("on");
+    };
+
+
+
+    var init = function() {
+  document.addEventListener("offline", offLine, false);
+  document.addEventListener("online", function(){
+    alert("on");
+  }, false);
 
 
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
+        
         var dimensions = {
             model : device.model,
             platform : device.platform
@@ -665,16 +679,22 @@ document.addEventListener('deviceready', function() {
 
 
 
-
-
-
-
         //window.localStorage.clear();
+
+
+
+
+
+
+
+
+
+
 
         getVideos();
         getRankings();
 
-         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -691,7 +711,7 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
-
+*/
 
 
 
