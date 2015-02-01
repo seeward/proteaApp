@@ -29,8 +29,8 @@ h4 {
 
 #mainMenu {
     display:none;
-   
-    margin-left:60px;
+  
+    right:0px;
     position: fixed;
     z-index: 32;
    
@@ -159,8 +159,8 @@ ul li {
     display: none;
     position: fixed;
     z-index:8;
-    padding-left:12px;
-    padding-top:3px;
+    padding-left:20px;
+    padding-top:10px;
     top:0px;
     left:0px;
     width:80px;
@@ -185,6 +185,12 @@ ul li {
 }
 
 
+.wcMenu {
+    background-color: white;
+    border-radius: 7px;
+    padding:10px;
+
+}
 
 #helper {
     position:absolute;
@@ -203,6 +209,9 @@ ul li {
     border-radius: 7px;
     color:white;
 }
+
+
+
         </style>
 
         <div class="globalStatus"></div>
@@ -213,7 +222,7 @@ ul li {
 <div id="helper"><p>Swipe right for more -->>>></p></div>
 
 
-<div id="brand"><img src="imgs/48.png"></div>
+<div id="brand"><img src="imgs/36.png"></div>
 <div class='container'>
 
 
@@ -223,7 +232,7 @@ ul li {
     <div class="btn-group" >
 
     
-    <button class='btn btn-success' type="button" id='fixtures'>WC 2015</button>
+    <button class='btn btn-success btn-block' type="button" id='wcLauncher'>World Cup 2015</button>
     
 
     
@@ -339,6 +348,22 @@ height:500px;
 
 
 </div>
+
+
+<div class='wcMenu' style='display:none;position:absolute;left:100px;right:0px;top:45px'>
+    <div class="container">
+            <button class="btn btn-success btn-block" id="fixtures">Fixtures</button>
+    <button class="btn btn-success btn-block" id="resultsLog">Results Log</button>
+
+            <button class="btn btn-success btn-block" id="featuresWC">Features</button>
+            <button class="btn btn-success btn-block" id="recordsWC">Proteas WC Records</button>
+        </div>
+</div>
+
+
+
+
+
 <div class='fixtures' style='position:absolute;left:-11000px'></div>
 <div class="players" style='position:absolute;left:-11000px'></div>
 <div class='videos' style='position:absolute;left:-11000px'></div>
@@ -374,7 +399,7 @@ height:500px;
  <div style="width:100%">
 
       <button class='btn btn-success' type="button" id='home'><span class="glyphicon glyphicon-fire"></span></button>
-      
+
 <button class='btn btn-success' type="button" id='players'><span class="glyphicon glyphicon-user"></span></button>
     <button class='btn btn-success' type="button" id='videos'><span class="glyphicon glyphicon-film"></span></button>
     <button class='btn btn-success' type="button" id='records'><span class="glyphicon glyphicon-stats"></span></button>

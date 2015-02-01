@@ -58,6 +58,20 @@ document.addEventListener('deviceready', function() {
 
 
 
+
+
+
+    $("body").on("touchstart", "#wcLauncher", function(e) {
+
+
+        $(".wcMenu").toggle();
+    });
+
+
+
+
+
+
     $("#page").on("touchstart", "#register", function(e) {
 
 
@@ -384,14 +398,62 @@ document.addEventListener('deviceready', function() {
 
     });
 
-    $("#mainMenu").on("touchstart", "#fixtures", function(e) {
+    $(".wcMenu").on("touchstart", "#fixtures", function(e) {
         lastPage = currentPage;
         $("#page").html('');
         $("#page").scrollTop();
         $("#page").html(injectFixtures);
-
+        $(".wcMenu").hide();
         currentPage = injectFixtures;
     });
+
+    $(".wcMenu").on("touchstart", "#recordsWC", function(e) {
+        lastPage = currentPage;
+        $("#page").html('');
+        $("#page").scrollTop();
+        $("#page").html(injectRecords);
+        $(".wcMenu").hide();
+        currentPage = injectRecords
+    });
+
+    $(".wcMenu").on("touchstart", "#resultsLog", function(e) {
+
+        $(".wcMenu").hide();
+        $("#page").html("<h4>Loading Current Results...</h4>" + loader);
+
+        $.getJSON("https://www.kimonolabs.com/api/8wqdzeqg?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM", function(data) {
+            console.log(JSON.stringify(data.results.poola));
+            console.log(JSON.stringify(data.results.poolb));
+            var h = "<h4>World Cup Results Log</h4><hr><h5>Group A</h5><table class='table table-striped'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
+            var h2 = "<br><h5>Group B</h5><table class='table table-striped'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
+            $.each(data.results.poola, function(i, o) {
+                h += "<tr><td>" + o.positiona + "</td><td>" + o.teama + "</td><td>" + o.playeda + "</td><td>" + o.wona + "</td><td>" + o.lossa + "</td><td>" + o.tiea + "</td><td>" + o.pointsa + "</td><td>" + o.nrra + "</td><tr>";
+            });
+
+
+            $.each(data.results.poolb, function(i, o) {
+
+                if (o.team == "South Africa") {
+                    h2 += "<tr class='success'><td>" + o.position + "</td><td>" + o.team + "</td><td>" + o.played + "</td><td>" + o.won + "</td><td>" + o.loss + "</td><td>" + o.tied + "</td><td>" + o.points + "</td><td>" + o.nrr + "</td><tr>";
+
+                } else {
+                    h2 += "<tr><td>" + o.position + "</td><td>" + o.team + "</td><td>" + o.played + "</td><td>" + o.won + "</td><td>" + o.loss + "</td><td>" + o.tied + "</td><td>" + o.points + "</td><td>" + o.nrr + "</td><tr>";
+
+                }
+            });
+
+            h += "</table>";
+            h2 += "</table>";
+            $("#page").html(h + "<br><br>" + h2);
+        });
+
+
+
+
+    });
+
+
+
 
 
 
@@ -418,7 +480,56 @@ document.addEventListener('deviceready', function() {
     });
 
 
-var helperTag = false;
+    var helperTag = false;
+
+    $("#footer").on("touchstart", "#settings", function(e) {
+        alert("Settings Page will go here...");
+
+
+    });
+
+
+
+    $(".wcMenu").on("touchstart", "#featuresWC", function(e) {
+        getBlocks();
+        lastPage = currentPage;
+        $("#page").html('');
+        $("#page").scrollTop();
+
+        if (helperTag == false) {
+            setTimeout(function() {
+
+                $("#helper").fadeIn().delay(1000).fadeOut();;
+            }, 5000);
+
+            helperTag = true;
+        }
+        $(".wcMenu").hide();
+        var injectFeatures = $(".features").html();
+        $("#page").html(injectFeatures);
+
+        $(".carousel-inner").swipe({
+
+
+            swipeRight: function() {
+                $(this).parent().carousel('prev');
+
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold: 0
+        });
+
+        currentPage = injectHome;
+
+    });
+
+
+
+
+
+
+
+
 
     $("#footer").on("touchstart", "#home", function(e) {
         getBlocks();
@@ -434,9 +545,6 @@ var helperTag = false;
 
             helperTag = true;
         }
-
-
-
 
         var injectFeatures = $(".features").html();
         $("#page").html(injectFeatures);
@@ -779,7 +887,7 @@ var helperTag = false;
             $("#brand").show();
 
 
-
+            CountDownTimer('02/15/2015 10:1 AM', 'countHolder');
 
 
             //$(".home").trigger("touchstart");
