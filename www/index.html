@@ -78,8 +78,9 @@ img {
             top:55px;
             width:95%;
             padding:0px;
-
-            padding-bottom:35px;
+            height:100%;
+            padding-bottom:38px;
+            margin-bottom:40px;
             padding-left:10px;
             margin:0px;
         }
@@ -159,7 +160,7 @@ ul li {
     display: none;
     position: fixed;
     z-index:8;
-    padding-left:20px;
+    padding-left:10px;
     padding-top:10px;
     top:0px;
     left:0px;
@@ -187,11 +188,11 @@ ul li {
 
 .wcMenu {
     background-color: white;
-    border-radius: 7px;
-    padding:10px;
+
+    padding:3px;
     z-index: 111;
-    border-radius: 7px;
-    box-shadow: 0 0 7px black;
+    border-radius: 4px;
+    box-shadow: 0 0 3px black;
 
 
 }
@@ -223,10 +224,11 @@ ul li {
 }
 
 
-.appTitle {
+#brand span.appTitle {
 
-   margin-left:0px;
-   margin-left: 15px;
+   
+   margin-left: 10px;
+
    font-size: 20px
 
 }
@@ -267,7 +269,7 @@ ul li {
 <div class="home" style='position:absolute;left:-11000px'>
     
              <div class="row" style='margin-top:20px;margin-left:10px'>
-            <img id='proteasMain' class='img-rounded img-responsive' src='imgs/proteas.jpg' />
+            <img id='proteasMain' class='hidden-md hidden-lg hidden-sm img-rounded img-responsive' src='imgs/proteas.jpg' />
         </div>
         <div class="row" style='margin-top:20px;text-align:center;color:green'>
             <h4 style='font-size:30px'>Welcome to Protea Fire!</h4>
@@ -316,7 +318,8 @@ ul li {
 }
 
 .carousel-inner {
-height:500px;
+height:100%;
+
 }
 </style>
   </div>
@@ -368,9 +371,9 @@ height:500px;
 </div>
 
 
-<div class='wcMenu' style='display:none;position:fixed;left:80px;top:0px'>
+<div class='wcMenu' style='display:none;position:fixed;right:0px;top:60px'>
     <div class="container">
-        <p>World Cup 2015</p><hr>
+        <p>World Cup 2015</p>
             <button class="btn btn-success btn-block" id="fixtures">Fixtures</button>
     <button class="btn btn-success btn-block" id="resultsLog">Results Log</button>
 
@@ -442,18 +445,22 @@ height:500px;
 
 
 
-
+<h5>WC Batting Records</h5>
 <button class="btn btn-block btn-success" id="totalRuns">Career Runs in WC</button>
 <button class="btn btn-block btn-success" id="bestBattingInnings">Best Batting Innings</button>
 <button class="btn btn-block btn-success" id="boundariesInnings">Most Boundaries in an Innings</button>
 <button class="btn btn-block btn-success" id="runsByLineup">Most Runs by Batting Order</button>
+
+<button class="btn btn-block btn-success" id="wicketPartnerships">Highest Wkt Partnerships</button>
+
+<h5>WC Bowling Records</h5>
+
 <button class="btn btn-block btn-success" id="mostWickets">Most Wickets</button>
 <button class="btn btn-block btn-success" id="bestBowlingInnings">Best Bowling Innings</button>
 <button class="btn btn-block btn-success" id="bowlingCareer">Bowling Career by Player</button>
 <button class="btn btn-block btn-success" id="runsConceded">Most Runs Conceded</button>
-<button class="btn btn-block btn-success" id="wicketPartnerships">Highest Wkt Partnerships</button>
 
-
+<br><br><br>
 </div>
 
 
