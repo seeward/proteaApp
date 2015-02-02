@@ -188,7 +188,7 @@ document.addEventListener('deviceready', function() {
                         if (o.type == "regular") {
                             console.log(JSON.stringify(o));
                             hr += "<li class='tweets'>" + o['regular-body'] + "<div class='date'>" + o.date.substr(0, 17); + " || " + o['regular-title'] + "</div></li>";
-
+                            //alert(hr);
                         }
 
                         //if (o.type == "photo") {
@@ -457,6 +457,61 @@ document.addEventListener('deviceready', function() {
 
 
 
+    $("#page").on("touchstart", ".newsLinks", function(e) {
+        e.preventDefault();
+        srcLink = $(this).attr("id");
+        //var srcTitle = $(this).attr("titler");
+        //$("#page").load(srcLink+" .story-content-main p").prepend("<h4>THIS IS A TEST</h4>");
+        navigator.app.loadUrl(srcLink, {
+            openExternal: true
+        });
+
+
+
+    });
+
+    $("#page").on("touchstart", "#logout", function() {
+
+        window.localStorage.removeItem("user");
+
+        $("#page").html(login);
+
+    });
+
+    $("#page").on("touchstart", "#save", function() {
+
+        if ($("#pushSetting").is(":checked")) {
+            parsePlugin.subscribe('allAlerts', function() {
+        alert('OK');
+    }, function(e) {
+        alert('error');
+    });
+
+
+        } else {
+
+        }
+
+        if ($("#emailSetting").is(":checked")) {
+
+        } else {
+
+        }
+    });
+
+    $("#page").on("touchstart", "a", function(e) {
+        e.preventDefault();
+        srcLink = $(this).attr("href");
+        //alert(srcLink);
+        //var srcTitle = $(this).attr("titler");
+        //$("#page").load(srcLink+" .story-content-main p").prepend("<h4>THIS IS A TEST</h4>");
+        navigator.app.loadUrl(srcLink, {
+            openExternal: true
+        });
+
+
+
+    });
 
     $("#footer").on("touchstart", "#news", function(e) {
         lastPage = currentPage;
@@ -468,7 +523,7 @@ document.addEventListener('deviceready', function() {
 
         }).done(function(data) {
             $.each(data.value.items, function(i, o) {
-                h += "<li class='newsItem'><a style='color:#007E45' target='_blank' href='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
+                h += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' class='newsLinks' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
             });
 
 
@@ -886,7 +941,7 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+                 parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
