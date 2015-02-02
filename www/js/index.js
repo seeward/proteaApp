@@ -172,7 +172,7 @@ document.addEventListener('deviceready', function() {
 
     $("#footer").on("touchstart", "#connect",
         function(e) {
-            $("#page").html("<div class='container'><h4>Loading...</h4><br>" + loader + "</div>");
+            $("#page").html("<div class='container'><h4>Loading Social Media Feed...</h4><br>" + loader + "</div>");
 
             $.ajax({
                 url: "http://proteafirefan.tumblr.com/api/read/json?num=50",
@@ -483,19 +483,19 @@ document.addEventListener('deviceready', function() {
 
         if ($("#pushSetting").is(":checked")) {
             parsePlugin.subscribe('allAlerts', function() {
-                navigator.notifications.alert('You have subcribed to Push Alerts');
-            }, function(e) {
-                alert('error');
-            });
+        navigator.notifications.alert('You have subcribed to Push Alerts');
+    }, function(e) {
+        alert('error');
+    });
 
 
         } else {
 
             parsePlugin.unsubscribe('allAlerts', function() {
-                navigator.notifications.alert('You have subcribed to Push Alerts');
-            }, function(e) {
-                alert('error');
-            });
+        navigator.notifications.alert('You have subcribed to Push Alerts');
+    }, function(e) {
+        alert('error');
+    });
 
         }
 
@@ -934,6 +934,38 @@ document.addEventListener('deviceready', function() {
 
     var init = function() {
 
+        var images = new Array()
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    //alert("loading");
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+            preload(
+                "imgs/proteas.jpg",
+                "imgs/wc_logo.jpg",
+                "imgs/loader.gif",
+                "imgs/38.png",
+                "imgs/abd.png",
+                "imgs/ap.png",
+                "imgs/dm.png",
+                "imgs/ds.png",
+                "imgs/fdp.png",
+                "imgs/ha.png",
+                "imgs/it.png",
+                "imgs/jpd.png",
+                "imgs/ka.png",
+                "imgs/mm.png",
+                "imgs/qdk.png",
+                "imgs/rr.png",
+                "imgs/vp.png",
+                "imgs/wp.png",
+                "imgs/twitter.jpg",
+                "imgs/instagram.png"
+                
+            )
+
 
 
         Parse.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "qOWRwgP5SPUjGFzy5BrIKRHuT2kzRonqjXrKeSmC");
@@ -969,23 +1001,24 @@ document.addEventListener('deviceready', function() {
 
             var u = JSON.parse(window.localStorage.getItem("user"));
 
-            parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+            var userCurrent = u.u;
+                     parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
-                parsePlugin.subscribe(u.u, function() {
+            parsePlugin.subscribe(userCurrent, function() {
 
-                    parsePlugin.getInstallationId(function(id) {
-
-                    }, function(e) {
-
-                    });
+                parsePlugin.getInstallationId(function(id) {
 
                 }, function(e) {
-
+                   
                 });
 
             }, function(e) {
-
+               
             });
+
+        }, function(e) {
+          
+        });
 
 
 
