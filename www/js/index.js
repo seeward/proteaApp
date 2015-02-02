@@ -205,7 +205,7 @@ document.addEventListener('deviceready', function() {
 
                     hr += "</ul>";
 
-                    hd = "<button class='btn btn-success btn-xs pull-right' id='refresh' style='position:static'>refresh</button>";
+                    hd = "<button class='btn btn-success btn-xs pull-right' id='refresh' style='position:relative;top:30px'>refresh</button>";
                     $("#page").scrollTop();
                     $("#page").html(hr);
                     $("#page").prepend(hd).fadeIn(2000);
@@ -214,8 +214,9 @@ document.addEventListener('deviceready', function() {
             );
         });
 
-
-
+    $(document).on("touchstart", "#page", function() {
+        $(".wcMenu").hide();
+    });
 
     $("#page").on("touchstart", "#boundariesInnings", function(e) {
         lastPage = injectRecords;
@@ -224,7 +225,7 @@ document.addEventListener('deviceready', function() {
             i += "<tr><th>Runs</th><th>Balls</th><th>4s</th><th>6s</th><th>Player</th><th>Year</th></tr>";
 
             $.each(data, function(er, o) {
-                i += "<tr><td>" + o.runs + "</td><td>" + o.balls + "</td><td>" + o.fours + "</td><td>" + o.sixes + "</td><td>" + o.player.text + "</td><td>" + o.year + "</td></tr>";
+                i += "<tr><td>" + o.balls + "</td><td>" + o.runs + "</td><td>" + o.fours + "</td><td>" + o.sixes + "</td><td>" + o.player.text + "</td><td>" + o.year + "</td></tr>";
             });
 
             i += "</table></div>";
@@ -483,9 +484,9 @@ document.addEventListener('deviceready', function() {
     var helperTag = false;
 
     $("#footer").on("touchstart", "#settings", function(e) {
-       
-       var settings = $(".settings").html();
-       $("#page").html(settings);
+
+        var settings = $(".settings").html();
+        $("#page").html(settings);
 
     });
 
@@ -503,7 +504,7 @@ document.addEventListener('deviceready', function() {
                 $("#helper").fadeIn().delay(1000).fadeOut();;
             }, 5000);
 
-            
+
         }
         $(".wcMenu").hide();
         var injectFeatures = $(".features").html();
@@ -514,7 +515,7 @@ document.addEventListener('deviceready', function() {
 
             swipeRight: function() {
                 $(this).parent().carousel('prev');
-                
+
 
             },
             //Default is 75px, set to 0 for demo so any distance triggers swipe
@@ -753,59 +754,92 @@ document.addEventListener('deviceready', function() {
         //$("#helper").remove();
     })
 
+    var blocksArray = [];
+    var tz1Obj = {};
 
-
-
+    var offline = true;
     var getBlocks = function() {
 
-        var leadUp = Parse.Object.extend("wcLeadUp");
-        var query3 = new Parse.Query(leadUp);
-        //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
-        query3.find({
-            success: function(results) {
-                for (var i3 = 0; i3 < results.length; i3++) {
-                    var object = results[i3];
-                    h3 = object.get('body');
+        if (offline == false) {
+            var allBlocks = JSON.parse(window.localStorage.getItem("BLOCKS"));
+            $("#temp").remove();
+            $("#temp2").remove();
+            $("#temp3").remove();
+            $("#targetZone3").append(allBlocks.block1);
+            $("#targetZone2").append(allBlocks.block2);
+            $("#targetZone1").append(allBlocks.block3);
+        } else {
+            var leadUp = Parse.Object.extend("wcLeadUp");
+            var query3 = new Parse.Query(leadUp);
+            //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
+            query3.find({
+                success: function(results) {
+                    for (var i3 = 0; i3 < results.length; i3++) {
+                        var object = results[i3];
+
+                        h3 = object.get('body');
+
+                        tz1Obj.block1 = h3;
+
+                    }
+                    $("#temp3").remove();
+                    $("#targetZone1").append(h3)
+                    window.localStorage.setItem("BLOCKS", JSON.stringify(tz1Obj));
+
+                },
+                error: function(error) {}
+            });
+
+
+            var feat = Parse.Object.extend("featuredPlayer");
+            var query2 = new Parse.Query(feat);
+            //$("#targetZone3").append("<div id='temp2'>" + loader + "</div>");
+
+            query2.find({
+                success: function(results) {
+                    for (var i2 = 0; i2 < results.length; i2++) {
+                        var object = results[i2];
+                        h2 = object.get('body');
+
+                        tz1Obj.block3 = h2;
+
+                    }
+                    $("#temp2").remove();
+                    $("#targetZone3").append(h2)
+                    window.localStorage.setItem("BLOCKS", JSON.stringify(tz1Obj));
+
+                },
+                error: function(error) {
+
+
                 }
-                $("#temp3").remove();
-                $("#targetZone1").append(h3)
-            },
-            error: function(error) {}
-        });
+            });
+
+            var adBlock = Parse.Object.extend("adBlock");
+            var query = new Parse.Query(adBlock);
+            //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
+            query.find({
+                success: function(results) {
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        h = object.get('body');
+
+                        tz1Obj.block2 = h;
+
+                    }
+                    $("#temp").remove();
+                    $("#targetZone2").append(h)
+                    window.localStorage.setItem("BLOCKS", JSON.stringify(tz1Obj));
+
+                },
+                error: function(error) {}
+            });
 
 
-        var feat = Parse.Object.extend("featuredPlayer");
-        var query2 = new Parse.Query(feat);
-        //$("#targetZone3").append("<div id='temp2'>" + loader + "</div>");
 
-        query2.find({
-            success: function(results) {
-                for (var i2 = 0; i2 < results.length; i2++) {
-                    var object = results[i2];
-                    h2 = object.get('body');
-                }
-                $("#temp2").remove();
-                $("#targetZone3").append(h2)
-            },
-            error: function(error) {
+        }
 
-            }
-        });
 
-        var adBlock = Parse.Object.extend("adBlock");
-        var query = new Parse.Query(adBlock);
-        //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
-        query.find({
-            success: function(results) {
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    h = object.get('body');
-                }
-                $("#temp").remove();
-                $("#targetZone2").append(h)
-            },
-            error: function(error) {}
-        });
 
 
     };
@@ -852,7 +886,7 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe('allUsers', function() {
 
@@ -869,7 +903,7 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
-*/
+
 
 
 
