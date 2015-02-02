@@ -426,7 +426,7 @@ document.addEventListener('deviceready', function() {
             console.log(JSON.stringify(data.results.poola));
             console.log(JSON.stringify(data.results.poolb));
             var h = "<h4>World Cup Results Log</h4><hr><h5>Group A</h5><table class='table table-striped'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
-            var h2 = "<br><h5>Group B</h5><table class='table table-striped'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
+            var h2 = "<h5>Group B</h5><table class='table table-striped'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
             $.each(data.results.poola, function(i, o) {
                 h += "<tr><td>" + o.positiona + "</td><td>" + o.teama + "</td><td>" + o.playeda + "</td><td>" + o.wona + "</td><td>" + o.lossa + "</td><td>" + o.tiea + "</td><td>" + o.pointsa + "</td><td>" + o.nrra + "</td><tr>";
             });
@@ -457,7 +457,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-    $("#page").on("touchstart", ".newsLinks", function(e) {
+    $("#page").on("touchend", ".newsLinks", function(e) {
         e.preventDefault();
         srcLink = $(this).attr("id");
         //var srcTitle = $(this).attr("titler");
@@ -470,25 +470,32 @@ document.addEventListener('deviceready', function() {
 
     });
 
-    $("#page").on("touchstart", "#logout", function() {
+    $("#page").on("touchend", "#logout", function() {
 
         window.localStorage.removeItem("user");
-
+        $("#mainMenu").hide();
+        $("#footer").hide();
         $("#page").html(login);
 
     });
 
-    $("#page").on("touchstart", "#save", function() {
+    $("#page").on("touchend", "#save", function() {
 
         if ($("#pushSetting").is(":checked")) {
             parsePlugin.subscribe('allAlerts', function() {
-        alert('OK');
+        navigator.notifications.alert('You have subcribed to Push Alerts');
     }, function(e) {
         alert('error');
     });
 
 
         } else {
+
+                        parsePlugin.unsubscribe('allAlerts', function() {
+        navigator.notifications.alert('You have subcribed to Push Alerts');
+    }, function(e) {
+        alert('error');
+    });
 
         }
 
@@ -499,7 +506,7 @@ document.addEventListener('deviceready', function() {
         }
     });
 
-    $("#page").on("touchstart", "a", function(e) {
+    $("#page").on("touchend", "a", function(e) {
         e.preventDefault();
         srcLink = $(this).attr("href");
         //alert(srcLink);
@@ -941,9 +948,15 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-                 parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+      
 
-            parsePlugin.subscribe('allUsers', function() {
+        if (window.localStorage.getItem("user")) {
+
+            var u = JSON.parse(window.localStorage.getItem("user"));
+
+                       parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+
+            parsePlugin.subscribe(u.user, function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
@@ -958,15 +971,6 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
-
-
-
-
-
-
-        if (window.localStorage.getItem("user")) {
-
-
 
 
 
