@@ -483,19 +483,19 @@ document.addEventListener('deviceready', function() {
 
         if ($("#pushSetting").is(":checked")) {
             parsePlugin.subscribe('allAlerts', function() {
-        navigator.notifications.alert('You have subcribed to Push Alerts');
-    }, function(e) {
-        alert('error');
-    });
+                navigator.notifications.alert('You have subcribed to Push Alerts');
+            }, function(e) {
+                alert('error');
+            });
 
 
         } else {
 
-                        parsePlugin.unsubscribe('allAlerts', function() {
-        navigator.notifications.alert('You have subcribed to Push Alerts');
-    }, function(e) {
-        alert('error');
-    });
+            parsePlugin.unsubscribe('allAlerts', function() {
+                navigator.notifications.alert('You have subcribed to Push Alerts');
+            }, function(e) {
+                alert('error');
+            });
 
         }
 
@@ -715,14 +715,29 @@ document.addEventListener('deviceready', function() {
         var playerDetails = "<div class='container' style='padding:10px'>";
         playerDetails += "<h4>" + playerData.name + "</h4>";
         playerDetails += "<img class='img-rounded' style='margin-top:10px' src='" + playerData.img + "' width='300'>";
-        playerDetails += "<br><br><table class='table table-striped'>";
+
+        playerDetails += "<br><br><table class='table table-striped table-bordered'>";
         playerDetails += "<tr><td>" + playerData.role + "</td></tr>";
         playerDetails += "<tr><td>" + playerData.birthdate + "</td></tr>";
         playerDetails += "<tr><td>" + playerData.birthplace + "</td></tr>";
         playerDetails += "<tr><td>" + playerData.batting + "</td></tr>";
         playerDetails += "<tr><td>" + playerData.bowling + "</td></tr></table>";
-        playerDetails += "<p>" + playerData.bio + "</p>";
 
+
+        playerDetails += "<table class='table table-striped table table-bordered'>";
+        playerDetails += "<tr><td>Matches</td><td>Runs</td><td>Wickets</td></tr>";
+        playerDetails += "<tr class='success'><td>" + playerData.matches + "</td><td>" + playerData.runs + "</td><td>" + playerData.wickets + "</td></tr>";
+        playerDetails += "</table>";
+
+        if (playerData.twitter != "") {
+            playerDetails += "<h5>Social Media Links</h5><table class='table'>";
+            playerDetails += "";
+            playerDetails += "<tr align='center'><td><a href='" + playerData.insta + "'><img src='imgs/instagram.jpg' width='50'></a></td><td><a href='" + playerData.twitter + "'><img src='imgs/twitter.jpg' width='50'></a></td></tr>";
+            playerDetails += "</table><br>";
+
+        }
+
+        playerDetails += "<p>" + playerData.bio + "</p>";
         playerDetails += "</div>";
         $("#page").scrollTop();
         $("#page").html(playerDetails);
@@ -948,29 +963,29 @@ document.addEventListener('deviceready', function() {
         getVideos();
         getRankings();
 
-      
+
 
         if (window.localStorage.getItem("user")) {
 
             var u = JSON.parse(window.localStorage.getItem("user"));
 
-                       parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+            parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
-            parsePlugin.subscribe(u.user, function() {
+                parsePlugin.subscribe(u.u, function() {
 
-                parsePlugin.getInstallationId(function(id) {
+                    parsePlugin.getInstallationId(function(id) {
+
+                    }, function(e) {
+
+                    });
 
                 }, function(e) {
-                   
+
                 });
 
             }, function(e) {
-               
-            });
 
-        }, function(e) {
-          
-        });
+            });
 
 
 
