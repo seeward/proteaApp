@@ -25,8 +25,8 @@ document.addEventListener('deviceready', function() {
 
     var injectPlayers, injectVids, injectRank, injectNews, injectFixtures, injectRecords;
     var htmlFixtures = "<h4>World Cup Fixtures 2015</h4><hr><button id='sort' class='btn btn-block btn-success'>Proteas Games</button>";
-    var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
-    var fixturesHtml2 = "<h4>March</h4><table class='table table-striped'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
+    var fixturesHtml = htmlFixtures + "<h4>Feb</h4><table class='table table-striped table-condensed'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
+    var fixturesHtml2 = "<h4>March</h4><table class='table table-striped table-condensed'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><hr><ul>";
     var url = "https://www.kimonolabs.com/api/8m7imhmo?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
     var html = "<h4>Current ICC International Rankings</h4>";
@@ -119,7 +119,7 @@ document.addEventListener('deviceready', function() {
         }
 
 
-
+        $("#statusMsg").html(loader);
         var user = new Parse.User();
         user.set("username", u);
         user.set("password", p);
@@ -132,7 +132,7 @@ document.addEventListener('deviceready', function() {
 
         user.signUp(null, {
             success: function(user) {
-
+$("#page").scrollTop();
                 $("#page").html(injectHome);
                 $(".carousel-inner").swipe({
                     //Generic swipe handler for all directions
@@ -206,6 +206,8 @@ document.addEventListener('deviceready', function() {
 
     $("#footer").on("touchstart", "#connect",
         function(e) {
+            $("#page").html('');
+            $("#page").scrollTop();
             $("#page").html("<div class='container'><h4>Loading Social Media Feed...</h4><br>" + loader + "</div>");
 
             $.ajax({
@@ -240,6 +242,7 @@ document.addEventListener('deviceready', function() {
                     hr += "</ul>";
 
                     hd = "<button class='btn btn-success btn-xs pull-right' id='refresh' style='position:relative;top:30px'>refresh</button>";
+                    $("#page").html('');
                     $("#page").scrollTop();
                     $("#page").html(hr);
                     $("#page").prepend(hd).fadeIn(2000);
@@ -409,6 +412,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("#footer").on("touchstart", "#rankings", function(e) {
+        $("#page").scrollTop();
         $("#page").html('<h4>Loading current ICC Rankings</h4><br>' + loader);
 
 
@@ -590,6 +594,7 @@ document.addEventListener('deviceready', function() {
 
             hNew += "</ul>";
             $("#page").scrollTop();
+            $("#page").html("");
             $("#page").html(hNew);
             currentPage = hNew;
         });
@@ -618,7 +623,7 @@ document.addEventListener('deviceready', function() {
             setTimeout(function() {
 
                 $("#helper").fadeIn().delay(1000).fadeOut();;
-            }, 5000);
+            }, 3000);
 
 
         }
@@ -693,10 +698,10 @@ document.addEventListener('deviceready', function() {
             console.log(JSON.stringify(o));
 
             if (o.team1 === "South Africa" || o.team2 === "South Africa") {
-                fixturesHtml += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+                fixturesHtml += "<tr class='success'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb-" + o.date + "</td></tr>";
 
             } else {
-                fixturesHtml += "<tr class='notSaGames'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Feb - " + o.date + "</td></tr>";
+                fixturesHtml += "<tr class='notSaGames'><td>" + o.team1 + "</td><td>" + o.team2 + "</td><td>" + o.grounds + "</td><td>Mar-" + o.date + "</td></tr>";
 
             }
 
@@ -715,7 +720,7 @@ document.addEventListener('deviceready', function() {
 
         });
 
-        fixturesHtml2 += "</table>";
+        fixturesHtml2 += "</table><br><br><br>";
 
 
         $(".fixtures").html(fixturesHtml + fixturesHtml2);
@@ -766,7 +771,7 @@ document.addEventListener('deviceready', function() {
 
         $("#page").html('');
         var playerData = JSON.parse(d);
-        var playerDetails = "<div class='container' style='padding:10px'>";
+        var playerDetails = "<div class='container'>";
         playerDetails += "<h4>" + playerData.name + "</h4>";
         playerDetails += "<img class='img-rounded' style='margin-top:10px' src='" + playerData.img + "' width='300'>";
 
@@ -791,7 +796,7 @@ document.addEventListener('deviceready', function() {
 
         }
 
-        playerDetails += "<p>" + playerData.bio + "</p>";
+        playerDetails += "<p>" + playerData.bio + "</p><br><br><br>";
         playerDetails += "</div>";
         $("#page").scrollTop();
         $("#page").html(playerDetails);
@@ -1078,7 +1083,7 @@ document.addEventListener('deviceready', function() {
         });*/
 
 
-
+$("#page").scrollTop();
             $("#page").html(injectHome);
             //pageQueue.push("injectHome");
             currentPage = injectHome;
@@ -1090,7 +1095,7 @@ document.addEventListener('deviceready', function() {
             CountDownTimer('02/15/2015 10:1 AM', 'countHolder');
 
 
-            $(".home").trigger("touchstart");
+            $("#page").trigger("touchstart");
             if (device.platform == "iOS") {
                 $("#backer").show();
                 $(document).css("margin-top", "35px");
@@ -1099,6 +1104,7 @@ document.addEventListener('deviceready', function() {
                 $("#backer").css("margin-top", "25px");
             }
         } else {
+            $("#page").scrollTop();
             $("#page").html(login);
             $("#brand").show();
             //$("#helper").show();

@@ -56,7 +56,8 @@ background: linear-gradient(to bottom,  #ffcc00 0%,#ffe000 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', endColorstr='#ffe000',GradientType=0 ); /* IE6-9 */
 
     padding-top:10px;
-    padding-bottom: 5px
+    padding-bottom: 5px;
+
 }
 
 
@@ -72,17 +73,19 @@ img {
     z-index: 8;
 }
 
+
+
         #page {
+          
+            
     -webkit-overflow-scrolling: touch;
             position:absolute;
             top:55px;
             width:95%;
-            padding:0px;
-            height:100%;
-            padding-bottom:38px;
-            margin-bottom:40px;
+            overflow-x: hidden;
+            height:100%!important;
             padding-left:10px;
-            margin:0px;
+            
         }
 
         table {
@@ -317,6 +320,8 @@ ul li {
 
 .carousel-inner {
 height:100%;
+padding-bottom:100px;
+
 
 }
 </style>
@@ -437,11 +442,8 @@ height:100%;
 <div class="news" style="position:absolute;left:-11000px"></div>
 <div class="connect" style="position:absolute;left:-11000px"></div>
 <div class="records" style="position:absolute;left:-11000px">
-    <div class="container">
+
     <h4>Proteas World Cup Records</h4><hr>
-
-
-
 
 <h5>WC Batting Records</h5>
 <button class="btn btn-block btn-success" id="totalRuns">Career Runs in WC</button>
@@ -458,8 +460,7 @@ height:100%;
 <button class="btn btn-block btn-success" id="bowlingCareer">Bowling Career by Player</button>
 <button class="btn btn-block btn-success" id="runsConceded">Most Runs Conceded</button>
 
-<br><br><br>
-</div>
+
 
 
 </div>
