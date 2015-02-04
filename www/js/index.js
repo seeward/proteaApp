@@ -587,20 +587,20 @@ document.addEventListener('deviceready', function() {
 
         if ($("#pushSetting").is(":checked")) {
 
-                        parsePlugin.subscribe('fullAlerts', function() {
+            /*            parsePlugin.subscribe('allAlerts', function() {
         navigator.notifications.alert('You have subcribed to Push Alerts');
     }, function(e) {
         alert('error')e;
-    });
+    });*/
 
 
         } else {
 
-                        parsePlugin.unsubscribe('fullAlerts', function() {
-        navigator.notifications.alert('You have unsubcribed to Push Alerts');
+            /*            parsePlugin.unsubscribe('allAlerts', function() {
+        navigator.notifications.alert('You have subcribed to Push Alerts');
     }, function(e) {
         alert('error');
-    });
+    });*/
 
         }
 
@@ -1119,7 +1119,7 @@ document.addEventListener('deviceready', function() {
             var u = JSON.parse(window.localStorage.getItem("user"));
 
             var userCurrent = u.u;
-              parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+            /*  parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe(userCurrent, function() {
 
@@ -1135,7 +1135,7 @@ document.addEventListener('deviceready', function() {
 
         }, function(e) {
           
-        });
+        });*/
 
 
             $("#page").scrollTop();
