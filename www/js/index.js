@@ -76,6 +76,10 @@ document.addEventListener('deviceready', function() {
 
     document.addEventListener("backbutton", function(e) {
 
+
+        $("#page").html("");
+        $("#page").html(lastPage);
+
     }, true);
 
     $("body").on("touchstart", "#backer", function(e) {
@@ -172,7 +176,7 @@ document.addEventListener('deviceready', function() {
                     h += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
 
                 });
-                h += "</table></div>";
+                h += "</table><br><br><br></div>";
                 $("#page").html(h);
             });
         });
@@ -189,7 +193,7 @@ document.addEventListener('deviceready', function() {
                     h += "<tr><td>" + o.player.text + "</td><td>" + o.wkts + "</td><td>" + o.avg + "</td><td>" + o.srate + "</td><td>" + o.econ + "</td></tr>";
 
                 });
-                h += "</table></div>";
+                h += "</table><br><br><br></div>";
                 $("#page").html(h);
             });
         });
@@ -223,6 +227,8 @@ document.addEventListener('deviceready', function() {
                             hr += "<li class='tweets'>" + o['regular-body'] + "<div class='date'>" + o.date.substr(0, 17); + " || " + o['regular-title'] + "</div></li>";
                             //alert(hr);
                         }
+
+
 
                         //if (o.type == "photo") {
                         // alert(JSON.stringify(o));
@@ -273,7 +279,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.balls + "</td><td>" + o.runs + "</td><td>" + o.fours + "</td><td>" + o.sixes + "</td><td>" + o.player.text + "</td><td>" + o.year + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
 
@@ -291,7 +297,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.position + "</td><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
         });
@@ -308,7 +314,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.player.text + "</td><td>" + o.matches + "</td><td>" + o.runs + "</td><td>" + o.high + "</td><td>" + o.average + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
         });
@@ -334,7 +340,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.wicket + "</td><td>" + o.runs + "</td><td>" + o.players + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
         });
@@ -359,7 +365,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.score + "</td><td>" + o.bowler.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
         });
@@ -375,7 +381,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.player.text + "</td><td>" + o.wkts + "</td><td>" + o.best + "</td><td>" + o.average + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
         });
@@ -390,7 +396,7 @@ document.addEventListener('deviceready', function() {
                 i += "<tr><td>" + o.score + "</td><td>" + o.player.text + "</td><td>" + o.match.text + "</td><td>" + o.year + "</td></tr>";
             });
 
-            i += "</table></div>";
+            i += "</table><br><br><br></div>";
             $("#page").scrollTop();
             $("#page").html(i);
         });
@@ -618,17 +624,15 @@ document.addEventListener('deviceready', function() {
 
 
         srcLink = $(this).attr("href");
-
+        //alert(srcLink);
         window.open(srcLink, '_blank', 'location=yes');
 
-
-
-
+        srcLink = "";
 
     });
 
     $("#footer").on("touchstart", "#news", function(e) {
-        lastPage = currentPage;
+        
         $("#page").html("<h4>Loading latest News</h4><br>" + loader);
         hNew = "<h4>Latest South African News</h4><ul>"
         $.ajax({
@@ -637,11 +641,11 @@ document.addEventListener('deviceready', function() {
 
         }).done(function(data) {
             $.each(data.value.items, function(i, o) {
-                hNew += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' class='newsLinks' href='" + o.link + "' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
+                hNew += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' href='"+o.link+"' class='newsLinks' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
             });
 
-
-            hNew += "</ul>";
+            lastPage = currentPage;
+            hNew += "</ul><br><br><br>";
             $("#page").scrollTop();
             $("#page").html("");
             $("#page").html(hNew);
@@ -773,7 +777,7 @@ document.addEventListener('deviceready', function() {
 
         });
 
-        fixturesHtml2 += "</table><br><br><br>";
+        fixturesHtml2 += "</table><br><br>";
 
 
         $(".fixtures").html(fixturesHtml + fixturesHtml2);
@@ -812,6 +816,7 @@ document.addEventListener('deviceready', function() {
 
         $(".players").append(htmlPlayers);
         injectPlayers = $(".players").html();
+        currentPage = injectPlayers;
 
     };
 
@@ -821,7 +826,7 @@ document.addEventListener('deviceready', function() {
 
 
     $(".players").on("playerSelected", function(e, d) {
-
+        lastPage = currentPage;
         $("#page").html('');
         var playerData = JSON.parse(d);
         var playerDetails = "<div class='container'>";
@@ -852,6 +857,7 @@ document.addEventListener('deviceready', function() {
         playerDetails += "<p>" + playerData.bio + "</p><br><br><br>";
         playerDetails += "</div>";
         $("#page").scrollTop();
+
         $("#page").html(playerDetails);
 
 
@@ -1119,7 +1125,7 @@ document.addEventListener('deviceready', function() {
             var u = JSON.parse(window.localStorage.getItem("user"));
 
             var userCurrent = u.u;
-            /*  parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+              parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe(userCurrent, function() {
 
@@ -1135,7 +1141,13 @@ document.addEventListener('deviceready', function() {
 
         }, function(e) {
           
-        });*/
+        });
+
+
+
+    $(document).on("touchstart","#footer, .wcMenu",function(){
+            $("#page").css("background-image","none");
+    });
 
 
             $("#page").scrollTop();
@@ -1143,15 +1155,10 @@ document.addEventListener('deviceready', function() {
 
             $("#page").html("<h4>Loading...</h4><br>" + loader);
             setTimeout(function() {
-                $("#page").html(injectHome);
+                $("#page").html(injectHome).show();
+
 
             }, 500);
-
-
-
-
-
-
 
 
 
@@ -1160,8 +1167,6 @@ document.addEventListener('deviceready', function() {
             $("#mainMenu").show();
             $("#footer").show();
             $("#brand").show();
-
-
 
 
 
