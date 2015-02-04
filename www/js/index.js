@@ -144,7 +144,10 @@ document.addEventListener('deviceready', function() {
 
         user.signUp(null, {
             success: function(user) {
+                 $("#page").hide();
+                  $("#page").html('');
                 $("#page").scrollTop();
+                $("#page").css("background-image","imgs/bigBG.jpg");
                 $("#page").html(injectHome);
 
                 $("#mainMenu").show();
@@ -1180,7 +1183,8 @@ document.addEventListener('deviceready', function() {
             }
         } else {
             $("#page").scrollTop();
-            $("#page").html(login);
+            $("#page").css("background-image","none");
+            $("#page").html(login).show();
             $("#brand").show();
             //$("#helper").show();
         }
