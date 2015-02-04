@@ -166,10 +166,11 @@ document.addEventListener('deviceready', function() {
                   $("#page").html('');
                 $("#page").scrollTop();
                 $("#page").css("background-image","imgs/bigBG.jpg");
-                $("#page").html(injectHome);
+                
 
                 $("#mainMenu").show();
                 $("#footer").show();
+                $("#page").html(injectHome).show();
                 currentPage = injectHome;
                 window.localStorage.setItem("user", JSON.stringify(userDetails));
             },
