@@ -137,10 +137,28 @@ document.addEventListener('deviceready', function() {
         user.set("password", p);
         user.set("email", e);
 
-        userDetails = {};
+        var userDetails = {};
         userDetails.u = u;
         userDetails.p = p;
         userDetails.e = e;
+
+         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+
+            parsePlugin.subscribe(userDetails.e, function() {
+
+                parsePlugin.getInstallationId(function(id) {
+
+                }, function(e) {
+                   
+                });
+
+            }, function(e) {
+               
+            });
+
+        }, function(e) {
+          
+        });
 
         user.signUp(null, {
             success: function(user) {
