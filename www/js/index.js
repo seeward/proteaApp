@@ -99,6 +99,14 @@ document.addEventListener('deviceready', function() {
 
 
         $(".wcMenu").toggle();
+
+        var dimensions2 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        //Parse.Analytics.track('wcLaunch', dimensions2);
     });
 
 
@@ -132,20 +140,9 @@ document.addEventListener('deviceready', function() {
 
         user.signUp(null, {
             success: function(user) {
-$("#page").scrollTop();
+                $("#page").scrollTop();
                 $("#page").html(injectHome);
-                $(".carousel-inner").swipe({
-                    //Generic swipe handler for all directions
 
-                    swipeRight: function() {
-                        $(this).parent().carousel('prev');
-                        $("#mainSpinner").carousel({
-                            interval: false
-                        });
-                    },
-                    //Default is 75px, set to 0 for demo so any distance triggers swipe
-                    threshold: 0
-                });
                 $("#mainMenu").show();
                 $("#footer").show();
                 currentPage = injectHome;
@@ -234,6 +231,13 @@ $("#page").scrollTop();
 
 
 
+                        var dimensions3 = {
+                            model: device.model,
+                            platform: device.platform
+                        };
+
+
+                        Parse.Analytics.track('connect', dimensions3);
 
 
 
@@ -246,7 +250,11 @@ $("#page").scrollTop();
                     $("#page").scrollTop();
                     $("#page").html(hr);
                     $("#page").prepend(hd).fadeIn(2000);
+
                 }
+
+
+
 
             );
         });
@@ -408,6 +416,15 @@ $("#page").scrollTop();
         $("#page").html(injectVids);
         currentPage = injectVids;
 
+
+        var dimensions6 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('videos', dimensions6);
+
     });
 
 
@@ -435,6 +452,15 @@ $("#page").scrollTop();
         $("#page").scrollTop();
         currentPage = injectRecords
 
+
+        var dimensions8 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('records', dimensions8);
+
     });
 
     $(".wcMenu").on("touchstart", "#fixtures", function(e) {
@@ -453,6 +479,14 @@ $("#page").scrollTop();
         $("#page").html(injectRecords);
         $(".wcMenu").hide();
         currentPage = injectRecords
+
+        var dimensions9 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('records-wc', dimensions9);
     });
 
 
@@ -468,7 +502,7 @@ $("#page").scrollTop();
     $("#page").on("touchstart", "#groupb", function() {
         $("h5").hide();
         $("#page table").hide();
-                $(".groupb").show();
+        $(".groupb").show();
         $(".grpbLabel").show();
     });
 
@@ -477,33 +511,57 @@ $("#page").scrollTop();
         $(".wcMenu").hide();
         $("#page").html("<h4>Loading Current Results...</h4>" + loader);
 
-        $.getJSON("https://www.kimonolabs.com/api/8wqdzeqg?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM", function(data) {
-            console.log(JSON.stringify(data.results.poola));
-            console.log(JSON.stringify(data.results.poolb));
-            var h = "<h4>World Cup Results Log</h4>";
-            h += "<div class='btn-group'><button id='groupa' class='btn btn-success'>Group A</button><button id='groupb' class='btn btn-success'>Group B</button></div>";
-            h += "<h5 class='grpaLabel'>Group A</h5><table class='table table-striped groupa'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
-            var h2 = "<h5 class='grpbLabel'>Group B</h5><table class='table table-striped groupb'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
-            $.each(data.results.poola, function(i, o) {
-                h += "<tr class='groupa'><td>" + o.positiona + "</td><td>" + o.teama + "</td><td>" + o.playeda + "</td><td>" + o.wona + "</td><td>" + o.lossa + "</td><td>" + o.tiea + "</td><td>" + o.pointsa + "</td><td>" + o.nrra + "</td><tr>";
-            });
 
 
-            $.each(data.results.poolb, function(i, o) {
 
-                if (o.team == "South Africa") {
-                    h2 += "<tr class='success groupb'><td>" + o.position + "</td><td>" + o.team + "</td><td>" + o.played + "</td><td>" + o.won + "</td><td>" + o.loss + "</td><td>" + o.tied + "</td><td>" + o.points + "</td><td>" + o.nrr + "</td><tr>";
+        var wcLogs = Parse.Object.extend("wcResultsLog");
+        var query3 = new Parse.Query(wcLogs);
+        query3.ascending("position")
+        var h9 = "<h4>World Cup Results Log</h4>";
+        h9 += "<div class='btn-group'><button id='groupa' class='btn btn-success'>Group A</button><button id='groupb' class='btn btn-success'>Group B</button></div>";
+        h9 += "<h5 class='grpaLabel'>Group A</h5><table class='table table-striped groupa'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
+        var h10 = "<h5 class='grpbLabel'>Group B</h5><table style='margin-bottom:45px' class='table table-striped groupb'><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>T</th><th>PTS</th><th>NRR</th></tr>";
 
-                } else {
-                    h2 += "<tr class='groupb'><td>" + o.position + "</td><td>" + o.team + "</td><td>" + o.played + "</td><td>" + o.won + "</td><td>" + o.loss + "</td><td>" + o.tied + "</td><td>" + o.points + "</td><td>" + o.nrr + "</td><tr>";
+        query3.find({
+            success: function(results) {
+                for (var i2 = 0; i2 < results.length; i2++) {
+                    var object = results[i2];
+                    if (object.get("group") == "a") {
+                        h9 += "<tr class='groupa'><td>" + object.get("position") + "</td><td>" + object.get("team") + "</td><td>" + object.get("played") + "</td><td>" + object.get("won") + "</td><td>" + object.get("loss") + "</td><td>" + object.get("tied") + "</td><td>" + object.get("points") + "</td><td>" + object.get("nrr") + "</td><tr>";
+
+                    } else {
+
+                        if (object.get("team") == "South Africa") {
+                            h10 += "<tr class='groupb success'><td>" + object.get("position") + "</td><td>" + object.get("team") + "</td><td>" + object.get("played") + "</td><td>" + object.get("won") + "</td><td>" + object.get("loss") + "</td><td>" + object.get("tied") + "</td><td>" + object.get("points") + "</td><td>" + object.get("nrr") + "</td><tr>";
+
+                        } else {
+                            h10 += "<tr class='groupb'><td>" + object.get("position") + "</td><td>" + object.get("team") + "</td><td>" + object.get("played") + "</td><td>" + object.get("won") + "</td><td>" + object.get("loss") + "</td><td>" + object.get("tied") + "</td><td>" + object.get("points") + "</td><td>" + object.get("nrr") + "</td><tr>";
+
+                        }
+                    }
+
+
 
                 }
-            });
 
-            h += "</table>";
-            h2 += "</table>";
-            $("#page").html(h + h2);
+                h9 += "</table>";
+                h10 += "</table>";
+                $("#page").html('');
+                $("#page").scrollTop();
+                $("#page").html(h9 + h10);
+
+
+            },
+            error: function(error) {
+
+
+            }
         });
+
+
+
+
+
 
 
 
@@ -514,18 +572,7 @@ $("#page").scrollTop();
 
 
 
-    $("#page").on("touchend", ".newsLinks", function(e) {
-        e.preventDefault();
-        srcLink = $(this).attr("id");
-        //var srcTitle = $(this).attr("titler");
-        //$("#page").load(srcLink+" .story-content-main p").prepend("<h4>THIS IS A TEST</h4>");
-        navigator.app.loadUrl(srcLink, {
-            openExternal: true
-        });
 
-
-
-    });
 
     $("#page").on("touchend", "#logout", function() {
 
@@ -564,15 +611,17 @@ $("#page").scrollTop();
         }
     });
 
-    $("#page").on("touchend", "a", function(e) {
+    //alert(device.platform);
+
+    $("#page").on("touchstart", "a", function(e) {
         e.preventDefault();
+
+
         srcLink = $(this).attr("href");
-        //alert(srcLink);
-        //var srcTitle = $(this).attr("titler");
-        //$("#page").load(srcLink+" .story-content-main p").prepend("<h4>THIS IS A TEST</h4>");
-        navigator.app.loadUrl(srcLink, {
-            openExternal: true
-        });
+
+        window.open(srcLink, '_blank', 'location=yes');
+
+
 
 
 
@@ -580,7 +629,7 @@ $("#page").scrollTop();
 
     $("#footer").on("touchstart", "#news", function(e) {
         lastPage = currentPage;
-        $("#page").html('<h4>Loading latest News</h4><br>' + loader);
+        $("#page").html("<h4>Loading latest News</h4><br>" + loader);
         hNew = "<h4>Latest South African News</h4><ul>"
         $.ajax({
             url: "http://pipes.yahoo.com/pipes/pipe.run?_id=fb5976bfef39b2913e42671e86c505c5&_render=json",
@@ -588,7 +637,7 @@ $("#page").scrollTop();
 
         }).done(function(data) {
             $.each(data.value.items, function(i, o) {
-                hNew += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' class='newsLinks' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
+                hNew += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' class='newsLinks' href='" + o.link + "' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
             });
 
 
@@ -619,31 +668,23 @@ $("#page").scrollTop();
         $("#page").html('');
         $("#page").scrollTop();
 
-        if (helperTag == false) {
-            setTimeout(function() {
 
-                $("#helper").fadeIn().delay(1000).fadeOut();;
-            }, 3000);
-
-
-        }
         $(".wcMenu").hide();
         var injectFeatures = $(".features").html();
         $("#page").html(injectFeatures);
 
-        $(".carousel-inner").swipe({
 
-
-            swipeRight: function() {
-                $(this).parent().carousel('prev');
-
-
-            },
-            //Default is 75px, set to 0 for demo so any distance triggers swipe
-            threshold: 0
-        });
 
         currentPage = injectHome;
+
+
+        var dimensions4 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('features', dimensions4);
 
     });
 
@@ -661,14 +702,7 @@ $("#page").scrollTop();
         $("#page").html('');
         $("#page").scrollTop();
 
-        if (helperTag == false) {
-            setTimeout(function() {
 
-                $("#helper").fadeIn().delay(1000).fadeOut();;
-            }, 5000);
-
-            helperTag = true;
-        }
 
         var injectFeatures = $(".features").html();
         $("#page").html(injectFeatures);
@@ -686,8 +720,16 @@ $("#page").scrollTop();
 
         currentPage = injectHome;
 
-    });
 
+        var dimensions5 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('features-icon', dimensions5);
+
+    });
 
 
     $.getJSON("fixtures.json", processData);
@@ -951,6 +993,8 @@ $("#page").scrollTop();
                 }
             });
 
+
+
             var adBlock = Parse.Object.extend("adBlock");
             var query = new Parse.Query(adBlock);
             //$("#targetZone2").append("<div id='temp'>" + loader + "</div>");
@@ -1083,8 +1127,23 @@ $("#page").scrollTop();
         });*/
 
 
-$("#page").scrollTop();
-            $("#page").html(injectHome);
+            $("#page").scrollTop();
+
+
+            $("#page").html("<h4>Loading...</h4><br>" + loader);
+            setTimeout(function() {
+                $("#page").html(injectHome);
+
+            }, 500);
+
+
+
+
+
+
+
+
+
             //pageQueue.push("injectHome");
             currentPage = injectHome;
             $("#mainMenu").show();
@@ -1092,7 +1151,7 @@ $("#page").scrollTop();
             $("#brand").show();
 
 
-            CountDownTimer('02/15/2015 10:1 AM', 'countHolder');
+
 
 
             $("#page").trigger("touchstart");
@@ -1121,16 +1180,6 @@ $("#page").scrollTop();
 
 
 
-
-        $(".carousel-inner").swipe({
-            //Generic swipe handler for all directions
-            swipeRight: function() {
-
-                $(this).parent().carousel('prev');
-            },
-            //Default is 75px, set to 0 for demo so any distance triggers swipe
-            threshold: 0
-        });
     };
 
     init();

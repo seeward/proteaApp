@@ -96,6 +96,11 @@ img {
     width: 100%;
 }
 
+#mainImage {
+    background-image: url("imgs/newMain.jpg");
+    background-repeat: none;
+}
+
 .tweets {
     margin-top:15px;
     margin-bottom: 15px;
@@ -189,8 +194,15 @@ ul li {
 }
 
 
-.wcMenu {
-    background-color: white;
+.wcMenu { color: black;
+     background: #ffcc00; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffcc00 0%, #ffe000 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffcc00), color-stop(100%,#ffe000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffcc00 0%,#ffe000 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffcc00 0%,#ffe000 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffcc00 0%,#ffe000 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffcc00 0%,#ffe000 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', endColorstr='#ffe000',GradientType=0 ); /* IE6-9 */
 
     padding:3px;
     z-index: 111;
@@ -224,6 +236,16 @@ ul li {
     border-top-right-radius:0;
     border-top-left-radius:0;
 
+
+}
+
+#mainImage {
+
+    display:block;
+    width:90%;
+    height:200px;
+    margin-left:20px!important;
+    border: 2px solid #c1c1c1;
 }
 
 
@@ -268,9 +290,16 @@ ul li {
 
 
 <div class="home" style='position:absolute;left:-11000px'>
-    
-             <div class="row" style='margin-top:20px;margin-left:10px'>
-            <img id='proteasMain' class='hidden-md hidden-lg hidden-sm img-rounded img-responsive' src='imgs/proteas.jpg' />
+  
+             <div class="row" style='margin-top:20px;margin-left:10px' id='mainImage'>
+
+
+                
+
+
+
+
+            <noscript>  <img id='proteasMain' class='hidden-md hidden-lg hidden-sm img-rounded img-responsive' src='imgs/newMain.jpg' /></noscript>
         </div>
         <div class="row" style='margin-top:20px;text-align:center;color:green'>
             <h4 style='font-size:30px'>Welcome to Protea Fire!</h4>
@@ -424,7 +453,7 @@ padding-bottom:100px;
   <label class="col-md-4 control-label" for="button1id"></label>
   <div class="col-md-8">
     <button id="save" name="save" class="btn btn-success">Save</button>
-    <button id="logout" name="logout" class="btn btn-danger">Log Out</button>
+   <noscript> <button id="logout" name="logout" class="btn btn-danger">Log Out</button></noscript>
   </div>
 </div>
 
