@@ -663,6 +663,8 @@ document.addEventListener('deviceready', function() {
 
 
     $(".wcMenu").on("touchstart", "#featuresWC", function(e) {
+
+        
         getBlocks();
         lastPage = currentPage;
         $("#page").html('');
@@ -672,7 +674,16 @@ document.addEventListener('deviceready', function() {
         $(".wcMenu").hide();
         var injectFeatures = $(".features").html();
         $("#page").html(injectFeatures);
+ $(".carousel-inner").swipe({
 
+
+            swipeRight: function() {
+                $(this).parent().carousel('prev');
+
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold: 0
+        });
 
 
         currentPage = injectHome;
