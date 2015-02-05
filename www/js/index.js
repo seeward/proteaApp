@@ -259,13 +259,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-                        var dimensions3 = {
-                            model: device.model,
-                            platform: device.platform
-                        };
-
-
-                        Parse.Analytics.track('connect', dimensions3);
+                      
 
 
 
@@ -278,6 +272,13 @@ document.addEventListener('deviceready', function() {
                     $("#page").scrollTop();
                     $("#page").html(hr);
                     $("#page").prepend(hd).fadeIn(2000);
+                      var dimensions3 = {
+                            model: device.model,
+                            platform: device.platform
+                        };
+
+
+                        Parse.Analytics.track('connect', dimensions3);
 
                 }
 
@@ -982,9 +983,9 @@ document.addEventListener('deviceready', function() {
             $("#temp").remove();
             $("#temp2").remove();
             $("#temp3").remove();
-            $("#targetZone3").append(allBlocks.block1);
-            $("#targetZone2").append(allBlocks.block2);
-            $("#targetZone1").append(allBlocks.block3);
+            $("#targetZone3").html(allBlocks.block1);
+            $("#targetZone2").html(allBlocks.block2);
+            $("#targetZone1").html(allBlocks.block3);
         } else {
             var leadUp = Parse.Object.extend("wcLeadUp");
             var query3 = new Parse.Query(leadUp);
@@ -1147,9 +1148,9 @@ document.addEventListener('deviceready', function() {
             var u = JSON.parse(window.localStorage.getItem("user"));
 
             var userCurrent = u.u;
-              parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+             /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
-            parsePlugin.subscribe(userCurrent, function() {
+            parsePlugin.subscribe("allUsers", function() {
 
                 parsePlugin.getInstallationId(function(id) {
 
@@ -1163,7 +1164,7 @@ document.addEventListener('deviceready', function() {
 
         }, function(e) {
           
-        });
+        });*/
 
 
 
@@ -1194,11 +1195,12 @@ document.addEventListener('deviceready', function() {
 
             $("#page").trigger("touchstart");
             if (device.platform == "iOS") {
-                $("#backer").show();
-                $(document).css("margin-top", "35px");
+                $("#page").css("top","90px");
+                
+                $("#wcLauncher").css("margin-top", "35px");
                 $("#brand").css("padding-top", "35px");
-                //
-                $("#backer").css("margin-top", "25px");
+                $("#brand").css("height","90px");
+                //$("#backer").css("margin-top", "25px");
             }
         } else {
             $("#page").scrollTop();
