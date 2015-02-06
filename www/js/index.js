@@ -1063,7 +1063,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-        var images = new Array()
+        var images = new Array();
 
         function preload() {
             for (i = 0; i < preload.arguments.length; i++) {
@@ -1132,7 +1132,7 @@ document.addEventListener('deviceready', function() {
             var u = JSON.parse(window.localStorage.getItem("user"));
 
             var userCurrent = u.u;
-            /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+             parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe("allUsers", function() {
 
@@ -1148,7 +1148,7 @@ document.addEventListener('deviceready', function() {
 
         }, function(e) {
           
-        });*/
+        });
 
 
 
