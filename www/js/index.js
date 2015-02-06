@@ -1152,6 +1152,8 @@ document.addEventListener('deviceready', function() {
 
 
 
+
+
             $(document).on("touchstart", "#footer, .wcMenu", function() {
                 $("#page").css("background-image", "none");
             });
