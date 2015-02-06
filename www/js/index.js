@@ -14,7 +14,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-
+    var helperTag = false;
     var loader = "<div class='container'><img src='imgs/loader.gif'></div>";
     var homePage = $(".home").html();
     var login = $(".login").html();
@@ -142,31 +142,15 @@ document.addEventListener('deviceready', function() {
         userDetails.p = p;
         userDetails.e = e;
 
-         parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
-            parsePlugin.subscribe(userDetails.e, function() {
-
-                parsePlugin.getInstallationId(function(id) {
-
-                }, function(e) {
-                   
-                });
-
-            }, function(e) {
-               
-            });
-
-        }, function(e) {
-          
-        });
 
         user.signUp(null, {
             success: function(user) {
-                 $("#page").hide();
-                  $("#page").html('');
+                $("#page").hide();
+                $("#page").html('');
                 $("#page").scrollTop();
-                $("#page").css("background-image","imgs/bigBG.jpg");
-                
+                $("#page").css("background-image", "imgs/bigBG.jpg");
+
 
                 $("#mainMenu").show();
                 $("#footer").show();
@@ -259,7 +243,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-                      
+
 
 
 
@@ -272,13 +256,13 @@ document.addEventListener('deviceready', function() {
                     $("#page").scrollTop();
                     $("#page").html(hr);
                     $("#page").prepend(hd).fadeIn(2000);
-                      var dimensions3 = {
-                            model: device.model,
-                            platform: device.platform
-                        };
+                    var dimensions3 = {
+                        model: device.model,
+                        platform: device.platform
+                    };
 
 
-                        Parse.Analytics.track('connect', dimensions3);
+                    Parse.Analytics.track('connect', dimensions3);
 
                 }
 
@@ -655,7 +639,7 @@ document.addEventListener('deviceready', function() {
     });
 
     $("#footer").on("touchstart", "#news", function(e) {
-        
+
         $("#page").html("<h4>Loading latest News</h4><br>" + loader);
         hNew = "<h4>Latest South African News</h4><ul>"
         $.ajax({
@@ -664,7 +648,7 @@ document.addEventListener('deviceready', function() {
 
         }).done(function(data) {
             $.each(data.value.items, function(i, o) {
-                hNew += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' href='"+o.link+"' class='newsLinks' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
+                hNew += "<li class='newsItem'><a style='color:#007E45' data-titler= '" + o.title + "' href='" + o.link + "' class='newsLinks' id='" + o.link + "'>" + o.title + "</a><br><p style='font-size:12px;margin-bottom:-10px'>" + o.pubDate + "</p><hr></li>";
             });
 
             lastPage = currentPage;
@@ -678,7 +662,7 @@ document.addEventListener('deviceready', function() {
     });
 
 
-    var helperTag = false;
+
 
     $("#footer").on("touchstart", "#settings", function(e) {
 
@@ -1148,7 +1132,7 @@ document.addEventListener('deviceready', function() {
             var u = JSON.parse(window.localStorage.getItem("user"));
 
             var userCurrent = u.u;
-             /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+            /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe("allUsers", function() {
 
@@ -1168,9 +1152,9 @@ document.addEventListener('deviceready', function() {
 
 
 
-    $(document).on("touchstart","#footer, .wcMenu",function(){
-            $("#page").css("background-image","none");
-    });
+            $(document).on("touchstart", "#footer, .wcMenu", function() {
+                $("#page").css("background-image", "none");
+            });
 
 
             $("#page").scrollTop();
@@ -1195,16 +1179,16 @@ document.addEventListener('deviceready', function() {
 
             $("#page").trigger("touchstart");
             if (device.platform == "iOS") {
-                $("#page").css("top","90px");
-                
+                $("#page").css("top", "90px");
+
                 $("#wcLauncher").css("margin-top", "35px");
                 $("#brand").css("padding-top", "35px");
-                $("#brand").css("height","90px");
+                $("#brand").css("height", "90px");
                 //$("#backer").css("margin-top", "25px");
             }
         } else {
             $("#page").scrollTop();
-            $("#page").css("background-image","none");
+            $("#page").css("background-image", "none");
             $("#page").html(login).show();
             $("#brand").show();
             //$("#helper").show();
