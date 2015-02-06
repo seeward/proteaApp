@@ -587,14 +587,7 @@ document.addEventListener('deviceready', function() {
 
 
 
-    $("#page").on("touchend", "#logout", function() {
 
-        window.localStorage.removeItem("user");
-        $("#mainMenu").hide();
-        $("#footer").hide();
-        $("#page").html(login);
-
-    });
 
     $("#page").on("touchend", "#save", function() {
 
@@ -1109,29 +1102,6 @@ document.addEventListener('deviceready', function() {
         Parse.Analytics.track('appLaunch', dimensions);
 
 
-
-
-
-        //window.localStorage.clear();
-
-
-
-
-
-
-
-
-
-        getVideos();
-        getRankings();
-
-
-
-        if (window.localStorage.getItem("user")) {
-
-            var u = JSON.parse(window.localStorage.getItem("user"));
-
-            var userCurrent = u.u;
              parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe("allUsers", function() {
@@ -1149,6 +1119,16 @@ document.addEventListener('deviceready', function() {
         }, function(e) {
           
         });
+
+
+        getVideos();
+        getRankings();
+
+
+
+    
+
+            
 
 
 
@@ -1187,14 +1167,7 @@ document.addEventListener('deviceready', function() {
                 $("#brand").css("padding-top", "35px");
                 $("#brand").css("height", "90px");
                 //$("#backer").css("margin-top", "25px");
-            }
-        } else {
-            $("#page").scrollTop();
-            $("#page").css("background-image", "none");
-            $("#page").html(login).show();
-            $("#brand").show();
-            //$("#helper").show();
-        }
+
 
 
         $(".globalStatus").remove();
