@@ -587,7 +587,14 @@ document.addEventListener('deviceready', function() {
 
 
 
+    $("#page").on("touchend", "#logout", function() {
 
+        window.localStorage.removeItem("user");
+        $("#mainMenu").hide();
+        $("#footer").hide();
+        $("#page").html(login);
+
+    });
 
     $("#page").on("touchend", "#save", function() {
 
@@ -1126,40 +1133,22 @@ document.addEventListener('deviceready', function() {
 
 
 
-    
-
-            
-
-
-
+      
 
 
             $(document).on("touchstart", "#footer, .wcMenu", function() {
                 $("#page").css("background-image", "none");
             });
-
-
             $("#page").scrollTop();
-
-
             $("#page").html("<h4>Loading...</h4><br>" + loader);
             setTimeout(function() {
                 $("#page").html(injectHome).show();
-
-
             }, 500);
-
-
-
-            //pageQueue.push("injectHome");
             currentPage = injectHome;
             $("#mainMenu").show();
             $("#footer").show();
             $("#brand").show();
 
-
-
-            $("#page").trigger("touchstart");
             if (device.platform == "iOS") {
                 $("#page").css("top", "90px");
 
@@ -1167,6 +1156,7 @@ document.addEventListener('deviceready', function() {
                 $("#brand").css("padding-top", "35px");
                 $("#brand").css("height", "90px");
                 //$("#backer").css("margin-top", "25px");
+            }
 
 
 
