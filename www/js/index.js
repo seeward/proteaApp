@@ -34,7 +34,7 @@ document.addEventListener('deviceready', function() {
     html += "<h6 class='testLabel'>Test</h6><table class='table table-striped test'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
     var html2 = "<h6 class='odiLabel'>ODI</h6><table class='table table-striped odi'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
     var html3 = "<h6 class='t20Label'>T20</h6><table class='table table-striped t20'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
+
 
     var injectHome = $(".home").html();
 
@@ -422,12 +422,14 @@ document.addEventListener('deviceready', function() {
     });
 
     $("#footer").on("touchstart", "#videos", function(e) {
-        lastPage = currentPage;
 
-        $("#page").html('');
-        $("#page").scrollTop();
-        $("#page").html(injectVids);
-        currentPage = injectVids;
+        getVideos();
+
+
+
+
+
+
 
 
         var dimensions6 = {
@@ -442,6 +444,7 @@ document.addEventListener('deviceready', function() {
 
 
     $("#footer").on("touchstart", "#rankings", function(e) {
+        getRankings();
         $("#page").scrollTop();
         $("#page").html('<h4>Loading current ICC Rankings</h4><br>' + loader);
 
@@ -451,8 +454,8 @@ document.addEventListener('deviceready', function() {
 
         lastPage = currentPage;
 
-        $("#page").scrollTop();
-        $("#page").html(injectRank);
+
+
         currentPage = injectRank;
 
     });
@@ -797,10 +800,7 @@ document.addEventListener('deviceready', function() {
     $.getJSON("proteas.json", processPlayers);
 
     function processPlayers(dt) {
-
-
         $.each(dt, function(ind, ob) {
-
             if (ob.player.name == "Farhaan Behardien") {
                 // alert("Behardien");
                 htmlPlayers += "<li class='link' style='margin-left:15px;height:100px;margin-bottom:40px;border-bottom:2px solid #c1c1c1'><div style='float:left;margin-right:50px'><img id='" + JSON.stringify(ob.player) + "' class='pic' style='width:70px;' src='" + ob.player.img + "'></div><h4 style='margin-bottom:-4px'>" + ob.player.name + "</h4><p style='margin-bottom:-4px'>" + ob.player.role + "</p>" +
@@ -811,7 +811,6 @@ document.addEventListener('deviceready', function() {
             }
 
         });
-
 
         $("#page").on("touchend", ".pic", function(e) {
             e.preventDefault();
@@ -876,6 +875,7 @@ document.addEventListener('deviceready', function() {
     var getRankings = function() {
         $.getJSON(url, processData2);
 
+
         function processData2(data) {
             //console.log(JSON.stringify(data));
 
@@ -927,8 +927,8 @@ document.addEventListener('deviceready', function() {
             html3 += "</table>";
 
 
-            $(".rankings").html(html + html2 + html3);
-            injectRank = $(".rankings").html()
+            $("#page").html(html + html2 + html3);
+            //injectRank = $(".rankings").html()
 
         }
 
@@ -936,7 +936,11 @@ document.addEventListener('deviceready', function() {
 
 
     var getVideos = function() {
-        $.getJSON("videos.json", parseData);
+        $("#page").scrollTop();
+        $("#page").html('<h4>Loading ProteaFire Video Feed</h4>' + loader);
+
+            var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
+        $.getJSON("videos_backup.json", parseData);
 
         function parseData(data) {
             $.each(data, function(ind, obj) {
@@ -944,10 +948,10 @@ document.addEventListener('deviceready', function() {
             });
 
 
-            htmlVids += "</ul>";
-
-            $(".videos").html(htmlVids);
-            injectVids = $(".videos").html();
+            htmlVids += "</ul><br><br><br>";
+            $("#page").html("");
+            $("#page").html(htmlVids);
+            injectVids = $("#page").html();
         };
     }
 
@@ -1109,7 +1113,7 @@ document.addEventListener('deviceready', function() {
         Parse.Analytics.track('appLaunch', dimensions);
 
 
- parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
         alert('success');
     }, function(e) {
         alert('error');
@@ -1122,10 +1126,10 @@ document.addEventListener('deviceready', function() {
         alert('OK');
     }, function(e) {
         alert('error');
-    });
+    });*/
 
 
-            /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
+        /* parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe("allUsers", function() {
 
@@ -1144,35 +1148,35 @@ document.addEventListener('deviceready', function() {
         });*/
 
 
-        getVideos();
-        getRankings();
+
+        //getRankings();
 
 
 
-      
 
 
-            $(document).on("touchstart", "#footer, .wcMenu", function() {
-                $("#page").css("background-image", "none");
-            });
-            $("#page").scrollTop();
-            $("#page").html("<h4>Loading...</h4><br>" + loader);
-            setTimeout(function() {
-                $("#page").html(injectHome).show();
-            }, 500);
-            currentPage = injectHome;
-            $("#mainMenu").show();
-            $("#footer").show();
-            $("#brand").show();
 
-            if (device.platform == "iOS") {
-                $("#page").css("top", "90px");
+        $(document).on("touchstart", "#footer, .wcMenu", function() {
+            $("#page").css("background-image", "none");
+        });
+        $("#page").scrollTop();
+        $("#page").html("<h4>Loading...</h4><br>" + loader);
+        setTimeout(function() {
+            $("#page").html(injectHome).show();
+        }, 500);
+        currentPage = injectHome;
+        $("#mainMenu").show();
+        $("#footer").show();
+        $("#brand").show();
 
-                $("#wcLauncher").css("margin-top", "35px");
-                $("#brand").css("padding-top", "35px");
-                $("#brand").css("height", "90px");
-                //$("#backer").css("margin-top", "25px");
-            }
+        if (device.platform == "iOS") {
+            $("#page").css("top", "90px");
+
+            $("#wcLauncher").css("margin-top", "35px");
+            $("#brand").css("padding-top", "35px");
+            $("#brand").css("height", "90px");
+            //$("#backer").css("margin-top", "25px");
+        }
 
 
 
