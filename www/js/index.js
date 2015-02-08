@@ -29,11 +29,7 @@ document.addEventListener('deviceready', function() {
     var fixturesHtml2 = "<h4>March</h4><table class='table table-striped table-condensed'><tr><th>Team A</th><th>Team B</th><th>Grounds</th><th>Date</th></tr>";
     var htmlPlayers = "<h4>Protea World Cup Squad 2015</h4><hr><ul>";
     var url = "https://www.kimonolabs.com/api/8m7imhmo?apikey=bn8MJcEsGlx72UgJ3ee0zXHvEUugNRKM";
-    var html = "<h4>Current ICC International Rankings</h4>";
-    html += "<div class='btn-group'><button id='tests' class='btn btn-success'>Test</button><button id='odis' class='btn btn-success'>ODIs</button><button id='t20s' class='btn btn-success'>T20s</button><button id='all' class='btn btn-success'>All</button></div>";
-    html += "<h6 class='testLabel'>Test</h6><table class='table table-striped test'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html2 = "<h6 class='odiLabel'>ODI</h6><table class='table table-striped odi'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
-    var html3 = "<h6 class='t20Label'>T20</h6><table class='table table-striped t20'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+
 
 
     var injectHome = $(".home").html();
@@ -46,6 +42,15 @@ document.addEventListener('deviceready', function() {
 
 
 
+    });
+
+    $(document).on("touchend", "#brand", function() {
+        navigator.notification.alert(
+            '*This is the Unofficial Protea Fan App for the ICC CWC 2015.\n\nThis Mobile Application is made by Protea Fans for Protea Fans. The app not the property of Cricket South Africa or #proteafire campaign. By using this app you agree to use it for test purposes only and not for commercial purposes. Unauthorised distribution of this app is prohibited.\n\n\nCricket South Africa will launch it’s own official Mobile Application end of 2015.', // message
+            null,
+            'UNOFFICIAL',
+            'ACCEPT'
+        );
     });
 
 
@@ -544,7 +549,6 @@ document.addEventListener('deviceready', function() {
                     var object = results[i2];
                     if (object.get("group") == "a") {
                         h9 += "<tr class='groupa'><td>" + object.get("position") + "</td><td>" + object.get("team") + "</td><td>" + object.get("played") + "</td><td>" + object.get("won") + "</td><td>" + object.get("loss") + "</td><td>" + object.get("tied") + "</td><td>" + object.get("points") + "</td><td>" + object.get("nrr") + "</td><tr>";
-
                     } else {
 
                         if (object.get("team") == "South Africa") {
@@ -873,6 +877,13 @@ document.addEventListener('deviceready', function() {
 
 
     var getRankings = function() {
+        var html = "<h4>Current ICC International Rankings</h4>";
+        html += "<div class='btn-group'><button id='tests' class='btn btn-success'>Test</button><button id='odis' class='btn btn-success'>ODIs</button><button id='t20s' class='btn btn-success'>T20s</button><button id='all' class='btn btn-success'>All</button></div>";
+        html += "<h6 class='testLabel'>Test</h6><table class='table table-striped test'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+        var html2 = "<h6 class='odiLabel'>ODI</h6><table class='table table-striped odi'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+        var html3 = "<h6 class='t20Label'>T20</h6><table class='table table-striped t20'><tr><th>Team</th><th>Matches</th><th>Points</th><th>Rating</th></tr>";
+
+        $("#page").html("");
         $.getJSON(url, processData2);
 
 
@@ -939,7 +950,7 @@ document.addEventListener('deviceready', function() {
         $("#page").scrollTop();
         $("#page").html('<h4>Loading ProteaFire Video Feed</h4>' + loader);
 
-            var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
+        var htmlVids = "<h4>Protea Fire Videos</h4><hr><ul>";
         $.getJSON("videos_backup.json", parseData);
 
         function parseData(data) {

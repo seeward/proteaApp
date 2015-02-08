@@ -21,11 +21,15 @@
 h4 {
     padding-left:10px;
     padding-top:10px;
+    color:white!important;
 }
 
-#proteasMain {
-    box-shadow: 0 0 15px black;
+p,h2,h3,h1,h5,.grpaLabel,.grpbLabel,h6.testLabel,h6.odiLabel,h6.t20Label {
+    color:white;
+
 }
+
+
 
 #mainMenu {
     display:none;
@@ -33,10 +37,7 @@ h4 {
     right:0px;
     position: fixed;
     z-index: 32;
-   
-    
 
-   
 }
 
 nav {
@@ -86,7 +87,7 @@ img {
             height:100%!important;
             padding-left:10px;
             padding-right:10px;
-            background-image: url('imgs/proteas.jpg');
+           background-color: black;
            -moz-background-size:100% 100%;
 -webkit-background-size:100% 100%;
 background-size:100% 100%;
@@ -96,6 +97,11 @@ background-size:100% 100%;
 
         table {
             width:100%;
+            background-color: white
+        }
+
+        table tr {
+            background-color: white
         }
 
         .btn-group {
@@ -103,8 +109,7 @@ background-size:100% 100%;
 }
 
 #mainImage {
-    background-image: url("imgs/newMain.jpg");
-    background-repeat: none;
+
 }
 
 .tweets {
@@ -113,8 +118,11 @@ background-size:100% 100%;
     border-bottom:2px solid black;
     margin-left: 0px;
     margin-right: 0px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
+    color:white;
 }
+
+
 
 .tweets img {
     margin: 5px;
@@ -187,7 +195,6 @@ ul li {
 #brand img {
     background-color: white;
     padding:3px;
-    padding-right:5px;
     border-radius: 7px
 }
 
@@ -251,16 +258,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', end
     width:90%;
     height:200px;
     margin-left:20px!important;
-    border: 2px solid #c1c1c1;
+ 
 }
 
 
 #brand span.appTitle {
 
    
-   margin-left: 10px;
+   padding-left: 10px;
 
-   font-size: 20px
+   font-size: 15px
 
 }
         </style>
@@ -273,7 +280,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', end
 <div id="helper"><p>Swipe right for more -->>>></p></div>
 
 
-<div id="brand"><img src="imgs/48.png"><span class="appTitle">Protea Fan App</span></div>
+<div id="brand"><img src="imgs/48.png"><span class="appTitle">UNOFFICIAL Protea Fan App</span></div>
 <div class='container'>
 
 <div id='mainMenu'>
@@ -297,18 +304,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', end
 
 <div class="home" style='position:absolute;left:-11000px'>
   
-           <noscript>    <div class="row" style='margin-top:20px;margin-left:10px' id='mainImage'>
+           <div class="row" style='margin-top:20px;margin-left:10px' id='mainImage'>
 
-
-                
-
-
-
-
-            <img id='proteasMain' class='hidden-md hidden-lg hidden-sm img-rounded img-responsive' src='imgs/newMain.jpg' />
-        </div></noscript>
-        <div class="row" style='margin-top:400px;color:white;width:100%;padding-right:10px'>
-            <h4 id="welcomeTag" style='font-size:26px;background-color:#5cb85c'>Welcome to Protea Fire!</h4>
+            <img id='proteasMain' class='hidden-md hidden-lg hidden-sm img-rounded img-responsive' src='imgs/proteas.jpg' />
+        </div>
+        <div class="row" style='margin-top:200px;color:white;width:100%;padding-right:10px'>
+            <h4 id="welcomeTag" style='font-size:26px;background-color:#5cb85c;'>Welcome to Protea Fire!</h4>
             <p style="margin-top:-15px;padding-left:15px;background-color:#5cb85c">Your place for Proteas World Cup Fever</p>
             <noscript>
             <div id="adBlock" style="background-color:#c1c1c1;margin-top:25px;height:60px;width:320px;color:grey;border-top:1px solid #c1c1c1;margin-left:35px"><p><br>ADBLOCK INSERTED HERE</p></div>
@@ -482,7 +483,7 @@ padding-bottom:100px;
 
     <h4>Proteas World Cup Records</h4><hr>
 
-<h5>WC Batting Records</h5>
+<h5 style="color:white">WC Batting Records</h5>
 <button class="btn btn-block btn-success" id="totalRuns">Career Runs in WC</button>
 <button class="btn btn-block btn-success" id="bestBattingInnings">Best Batting Innings</button>
 <button class="btn btn-block btn-success" id="boundariesInnings">Most Boundaries in an Innings</button>
@@ -490,7 +491,7 @@ padding-bottom:100px;
 
 <button class="btn btn-block btn-success" id="wicketPartnerships">Highest Wkt Partnerships</button>
 
-<h5>WC Bowling Records</h5>
+<h5  style="color:white">WC Bowling Records</h5>
 
 <button class="btn btn-block btn-success" id="mostWickets">Most Wickets</button>
 <button class="btn btn-block btn-success" id="bestBowlingInnings">Best Bowling Innings</button>
@@ -537,7 +538,30 @@ padding-bottom:100px;
          <script type="text/javascript" src="js/parse.js"></script>
         <script type="text/javascript" src="js/bs.js"></script>
           <link rel="stylesheet" href="css/bs.css" >
-       
+       <style type="text/css">
+
+       .table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #000000;color:white;
+ }
+
+ table tr {
+    background-color: #222222;
+    color:white;
+ }
+
+
+
+
+
+
+
+  table tr.success {
+    background-color: white;
+    color:black;
+ }
+
+ </style>
         <script type="text/javascript" src="cordova.js"></script>
       
         <script type="text/javascript" src="js/index.js"></script>
