@@ -872,9 +872,6 @@ document.addEventListener('deviceready', function() {
 
 
 
-
-
-
     $(".players").on("playerSelected", function(e, d) {
         lastPage = currentPage;
         $("#page").html('');
@@ -1185,7 +1182,7 @@ document.addEventListener('deviceready', function() {
         alert('error');
     });*/
 
-
+/*
          parsePlugin.initialize("jParK9CQZdIRCsZtJ4d3UR5s1HNcZZPUhXlBJ1BN", "TzibPeTYbJFepHLudcSTIePRjKU5N8b89e806YlH", function() {
 
             parsePlugin.subscribe("allUsersNew", function() {
@@ -1202,7 +1199,7 @@ document.addEventListener('deviceready', function() {
 
         }, function(e) {
           
-        });
+        });*/
 
 
 
