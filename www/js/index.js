@@ -51,6 +51,14 @@ document.addEventListener('deviceready', function() {
             'UNOFFICIAL',
             'ACCEPT'
         );
+
+         var dimensions23 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('disclaimer', dimensions23);
     });
 
 
@@ -109,13 +117,7 @@ document.addEventListener('deviceready', function() {
 
         $(".wcMenu").toggle();
 
-        var dimensions2 = {
-            model: device.model,
-            platform: device.platform
-        };
-
-
-        //Parse.Analytics.track('wcLaunch', dimensions2);
+       
     });
 
 
@@ -424,6 +426,14 @@ document.addEventListener('deviceready', function() {
         $("#page").html(injectPlayers)
         currentPage = injectPlayers;
 
+         var dimensions26 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('players', dimensions26);
+
     });
 
     $("#footer").on("touchstart", "#videos", function(e) {
@@ -491,6 +501,14 @@ document.addEventListener('deviceready', function() {
         $("#page").html(injectFixtures);
         $(".wcMenu").hide();
         currentPage = injectFixtures;
+
+         var dimensions25 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('wcFixtures', dimensions25);
     });
 
     $(".wcMenu").on("touchstart", "#recordsWC", function(e) {
@@ -569,7 +587,13 @@ document.addEventListener('deviceready', function() {
                 $("#page").html('');
                 $("#page").scrollTop();
                 $("#page").html(h9 + h10);
+                 var dimensions22 = {
+            model: device.model,
+            platform: device.platform
+        };
 
+
+        Parse.Analytics.track('wcResults', dimensions22);
 
             },
             error: function(error) {
@@ -642,6 +666,13 @@ document.addEventListener('deviceready', function() {
         window.open(srcLink, '_blank', 'location=yes');
 
         srcLink = "";
+         var dimensions29 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('extLink', dimensions29);
 
     });
 
@@ -664,6 +695,15 @@ document.addEventListener('deviceready', function() {
             $("#page").html("");
             $("#page").html(hNew);
             currentPage = hNew;
+
+             var dimensions24 = {
+            model: device.model,
+            platform: device.platform
+        };
+
+
+        Parse.Analytics.track('news', dimensions24);
+
         });
 
     });
@@ -870,7 +910,13 @@ document.addEventListener('deviceready', function() {
 
         $("#page").html(playerDetails);
 
+ var dimensions27 = {
+            model: device.model,
+            platform: device.platform
+        };
 
+
+        Parse.Analytics.track(playerData.name, dimensions27);
 
     });
 
