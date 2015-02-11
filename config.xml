@@ -24,6 +24,7 @@
     <preference name="android-minSdkVersion" value="7" />
     <gap:plugin name="org.apache.cordova.battery-status" />
     <feature name="http://api.phonegap.com/1.0/device"/>
+    <feature name="http://api.phonegap.com/1.0/notification"/>
 
     <gap:plugin name="org.apache.cordova.console" />
 
